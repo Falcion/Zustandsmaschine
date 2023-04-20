@@ -7,8 +7,4 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Briefmaschine" Version="1.1.0" />
-  </ItemGroup>
-
 </Project>

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Zustandsmaschine.Items.Attributes
+﻿namespace Zustandsmaschine.Items.Interfaces
 {
     /// <summary>
     /// An interface which defines common instance for flow's attributes

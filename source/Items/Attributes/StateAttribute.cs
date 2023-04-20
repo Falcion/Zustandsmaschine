@@ -1,7 +1,8 @@
 ﻿using System.Security;
 using System.Security.Cryptography;
-
 using System.Text;
+
+using Zustandsmaschine.Items.Interfaces;
 
 namespace Zustandsmaschine.Items.Attributes
 {
