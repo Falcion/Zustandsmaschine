@@ -13,21 +13,21 @@ Constructor summaries for params must clone summary for class fields and end wit
 
 Stars with `Thrown when [ETC]`.
 
-- Delegates, getters, setters
+- **Delegates, getters, setters**
 
 Delegates and public getters must clone "summary" for fields, setters also clone them, but starts with
 `Set the [FIELD] [FIELD_DESC]`
 
-- Method/Function
+- **Method/Function**
 
 Method must be started with `METHOD V+ing...`
 Function must be started with `FUNCTION V+ing ...`
 
-static => `static function... / static method...`
+> static => `static function... / static method...`
 
 Functions returns must clone summary for field (or just like if it was with summary).
 
-- Fields
+- **Fields**
 
 Bools must start with `Boolean parameter V+ing`
 Array of byte must start with `Array of byte data`
