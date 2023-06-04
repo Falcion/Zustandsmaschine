@@ -1,5 +1,7 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using System.Text;
+using System.Collections.Generic;
 using Zustand.Sets;
 
 namespace Zustand
@@ -13,7 +15,7 @@ namespace Zustand
         private long _codes = 0;
         private long _scope = 0;
 
-        readonly Dictionary<int, Pair<long, string>> _interactions = new();
+        readonly List<Pair<long, string>> _interactions = new List<Pair<long, string>>();
 
         public Deployment()
         {
@@ -48,12 +50,12 @@ namespace Zustand
 
         public void DeleteLast()
         {
-            _interactions.Remove(_interactions.Last().Key);
+            _interactions.RemoveAt(_interactions.Count - 1);
         }
 
         public void DeleteFirst()
         {
-            _interactions.Remove(_interactions.First().Key);
+            _interactions.RemoveAt(0);
         }
 
         public void AddMessage(string message)
@@ -71,7 +73,7 @@ namespace Zustand
 
             _codes = temp_codes;
 
-            _interactions.Add(_interactions.Count, new Pair<long, string>(_codes, message));
+            _interactions.Add(new Pair<long, string>(_codes, message));
 
             Analyze();
         }
@@ -89,9 +91,8 @@ namespace Zustand
 
             _codes = codes;
 
-            _interactions.Add(_interactions.Count, new Pair<long, string>(_codes, message));
-            _interactions.Add(_interactions.Count + 1,
-                new Pair<long, string>(_codes, $"Event had been called with custom \"DIRECT APPROACH\" variable, its delegates are attached: {_scope}"));
+            _interactions.Add(new Pair<long, string>(_codes, message));
+            _interactions.Add(new Pair<long, string>(_codes, $"Event had been called with custom \"DIRECT APPROACH\" variable, its delegates are attached: {_scope}"));
 
             Analyze();
         }
@@ -101,9 +102,8 @@ namespace Zustand
             _codes = codes;
             _scope = scope;
 
-            _interactions.Add(_interactions.Count, new Pair<long, string>(_codes, message));
-            _interactions.Add(_interactions.Count + 1,
-                new Pair<long, string>(_codes, $"Event had been called with custom \"DIRECT-DIRECT APPROACH\" variable, its delegates are attached: {_scope}"));
+            _interactions.Add(new Pair<long, string>(_codes, message));
+            _interactions.Add(new Pair<long, string>(_codes, $"Event had been called with custom \"DIRECT-DIRECT APPROACH\" variable, its delegates are attached: {_scope}"));
 
             Analyze();
         }
@@ -121,7 +121,7 @@ namespace Zustand
                 AddMessage("[SYS] Deployment has caught instability value!");
 
             if (_scope == -1)
-                AddMessage($"Total checksum SCOPE of deployment caught in total instability and exception situtation! Misbehave concluded in {_codes}::{_interactions.Count}");
+                AddMessage($"Total checksum SCOPE of deployment caught in total instability and exception situation! Misbehave concluded in {_codes}::{_interactions.Count}");
         }
 
         private void UpdateID()
@@ -152,7 +152,7 @@ namespace Zustand
         public long Codes => _codes;
         public long Scope => _scope;
 
-        public Dictionary<int, Pair<long, string>> Interactions => _interactions;
+        public List<Pair<long, string>> Interactions => _interactions;
 
     }
 }

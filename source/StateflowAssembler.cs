@@ -7,8 +7,6 @@ namespace Zustand
         private Stateflow _stateflow;
         private long _code = 0;
 
-        private readonly Dictionary<int, Stateflow> _interactions = new();
-
         #region Constructors
         public StateflowAssembler()
         {
@@ -212,15 +210,11 @@ namespace Zustand
 
         private void PostInit()
         {
-            _interactions.Add(0, _stateflow);
-
             _code = _stateflow.Code;
         }
 
         public Stateflow Stateflow => _stateflow;
         public Deployment Deployment { get; } = new Deployment();
         public long Code => _code;
-
-        public Dictionary<int, Stateflow> Interactions => _interactions;
     }
 }
