@@ -1,0 +1,71 @@
+{
+  "name": "zustand",
+  "version": "1.0.0",
+  "description": "Integrated state machine for your code with a custom message and logging system using a message broker on a stack-based storage",
+  "main": "index.js",
+  "scripts": {
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major",
+    "scripts:clear-start-with": "python scripts/file_clearing_script.py",
+    "scripts:cleanup_markdown": "python scripts/cleanup_markdown.py",
+    "build:prepare": "python scripts/csproj_import.py",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Falcion/Zustandsmaschine.git"
+  },
+  "keywords": [
+    "states",
+    "state-machine",
+    "messages",
+    "message-broker",
+    "logger",
+    "stack-data",
+    "states-assembler",
+    "states-analyzer",
+    "dotnet",
+    "csharp",
+    "sequencer",
+    "deployment-system",
+    "deployment",
+    "kafka"
+  ],
+  "author": "Falcion",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Falcion/Zustandsmaschine/issues",
+    "email": "io.falcion@outlook.com"
+  },
+  "homepage": "https://github.com/Falcion/Zustandsmaschine#readme",
+  "readme": "https://github.com/Falcion/Zustandsmaschine#readme",
+  "directories": {
+    "doc": "docs",
+    "bin": "source",
+    "test": "tests",
+    "man": ".github"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "sh scripts/husky_pre_commit && python scripts/version-check.py",
+      "commit-msg": "sh scripts/husky_commit_msg"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.5.0",
+    "@commitlint/config-conventional": "^17.4.4",
+    "cz-customizable": "^6.3.0",
+    "husky": "^8.0.0",
+    "standard-version": "^9.5.0"
+  },
+  "dependencies": {
+    "python": "^0.0.4"
+  }
+}

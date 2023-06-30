@@ -1,0 +1,40 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: .NET documentation
+    url: https://learn.microsoft.com/en-us/dotnet/
+    about: If your question is more about .NET than this project, check this documentation.
+
+mentions_enabled: true
+auto_assign_enabled: true
+
+notification_settings:
+  issues:
+    comments: true
+    status_changes: true
+    assignee_changes: true
+  pull_requests:
+    comments: true
+    status_changes: true
+    assignee_changes: true
+
+branch_protection:
+  main:
+    enforce_admins: true
+    required_status_checks:
+      - "continuous-integration"
+      - "code-review"
+    required_pull_request_reviews:
+      required_approving_review_count: 2
+      dismiss_stale_reviews: true
+
+code_scanning:
+  - name: CodeQL
+    enabled: true
+    configuration:
+      - name: "C# CodeQL"
+        language: csharp
+        query_suite: security-and-quality
+      - name: "Python CodeQL"
+        language: python
+        query_suite: security-extended
