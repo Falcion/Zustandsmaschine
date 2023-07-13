@@ -465,7 +465,8 @@ Temporary Items
 *.csr
 *.css
 *.htm
-*.html
+# Documentation purposes, not ignoring HTML files
+!*.html
 *.js
 *.jsp
 *.php

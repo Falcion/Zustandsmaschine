@@ -7,4 +7,4 @@ REM Generate the .sln file
 dotnet new sln --name Zustand
 
 REM Add the project to the solution
-dotnet sln add "%csproj_file%"
+dotnet sln add "%csproj_file%".csproj

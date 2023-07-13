@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get the .csproj file name
-csproj_file=$(ls *.csproj)
+csproj_file=$(ls -R | grep '\.csproj$')
 
 # Generate the .sln file
 dotnet new sln --name Zustand

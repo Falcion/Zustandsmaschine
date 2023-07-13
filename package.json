@@ -11,7 +11,9 @@
     "scripts:clear-start-with": "python scripts/file_clearing_script.py",
     "scripts:cleanup_markdown": "python scripts/cleanup_markdown.py",
     "build:prepare": "python scripts/csproj_import.py",
-    "prepare": "husky install"
+    "prepare:csproj": "python scripts/csproj_import.py",
+    "prepare:husky": "husky install",
+    "prepare:python": "cd scripts && py -m venv venv"
   },
   "repository": {
     "type": "git",
