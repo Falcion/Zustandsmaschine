@@ -1,0 +1,7 @@
+{
+    "csharp.format.enable": true,
+    "csharp.semanticHighlighting.enabled": true,
+    "csharp.suppressDotnetRestoreNotification": true,
+    "dotnet.defaultSolution": "source\\Zustand.sln",
+    "dotnet.codeLens.enableReferencesCodeLens": true
+}
