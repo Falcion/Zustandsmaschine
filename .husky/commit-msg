@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+    "$(dirname "$0")/_/husky.sh"
+
+commit_message=$(cat $1)
+
+commit_type=$(echo "$commit_message" | awk -F ":" '{print $1}')
+commit_types=$(cat ".versionrc.json" | jq -r '.types[].type')
+
+res="${original_string%%(*}"
+
+if ! echo "$commit_types" | grep -wq "$res"; then
+     echo "Error: Invalid commit type. Current type: $res. Allowed commit types are: $commit_types"
+     exit 1
+fi
+
+npx --no-installcommitlint--edit"$1"
+
+exit 0
