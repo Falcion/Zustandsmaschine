@@ -5,7 +5,9 @@
   "main": "main.ts",
   "type": "module",
   "directories": {
-    "doc": "docs"
+    "doc": "docs",
+    "bin": "source/bin",
+    "test": "source/test"
   },
   "scripts": {
     "preinit": "npm i --force",
@@ -24,26 +26,21 @@
     "prepack": "check-for-leaks",
     "prepare": "husky install && cd scripts/python && py -m venv venv",
     "prepare:husky": "husky install",
-    "prepare:python": "cd scripts && py -m venv venv",
+    "prepare:python": "cd scripts/python && py -m venv venv && cd ./../../source && py -m venv venv",
     "build": "tsc -noEmit -skipLibCheck main.ts && node esbuild.config.mjs production",
     "pack": "python scripts/python/pack.py",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
-    "release:major": "standard-version --release-as major"
+    "release:major": "standard-version --release-as major",
+    "versync": "python source/versync.py"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Falcion/Zustandsmaschine.git"
   },
   "keywords": [
-    "github",
-    "documentation",
-    "repository",
-    "repository-template",
-    "github-template",
-    "workflows-to-access",
-    "workflows-reusable"
+    
   ],
   "author": "Falcion",
   "license": "MIT",
