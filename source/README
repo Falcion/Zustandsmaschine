@@ -1,0 +1,50 @@
+                 _           _     ______   _ ____ _____  _    _   _ ____             
+ _ __  _ __ ___ (_) ___  ___| |_  |__  / | | / ___|_   _|/ \  | \ | |  _ \            
+| '_ \| '__/ _ \| |/ _ \/ __| __|   / /| | | \___ \ | | / _ \ |  \| | | | |           
+| |_) | | | (_) | |  __/ (__| |_   / /_| |_| |___) || |/ ___ \| |\  | |_| |           
+| .__/|_|  \___// |\___|\___|\__| /____|\___/|____/ |_/_/   \_\_| \_|____/            
+|_|           |__/                 _             _____ _    _     ____ ___ ___  _   _ 
+                                  | |__  _   _  |  ___/ \  | |   / ___|_ _/ _ \| \ | |
+                           _____  | '_ \| | | | | |_ / _ \ | |  | |    | | | | |  \| |
+                          |_____| | |_) | |_| | |  _/ ___ \| |__| |___ | | |_| | |\  |
+                                  |_.__/ \__, | |_|/_/   \_\_____\____|___\___/|_| \_|
+                                         |___/                                        
+
+Project ZUSTAND is a .NET project which supports ready-to-use pattern of state-machine
+which can be used in numerous variates of projects and spheres of business logic, it's
+main purpose can be represented in one thing — staging the states.
+
+Before using this project in your ones, its highly recommended to read the documentation
+about its functionality, the thesises and references with schemas for better acknowledgements.
+
+  ____                       _       _     _     
+ / ___|___  _ __  _   _ _ __(_) __ _| |__ | |_   
+| |   / _ \| '_ \| | | | '__| |/ _` | '_ \| __|  
+| |__| (_) | |_) | |_| | |  | | (_| | | | | |_ _ 
+ \____\___/| .__/ \__, |_|  |_|\__, |_| |_|\__(_)
+           |_|    |___/        |___/             
+
+Project ZUSTAND is not protected by affiliated copyright, but shared
+under the terms of MIT license, so please, make a reference to this one
+and it will be highly appreciated and support more community around its
+repository and source. 
+ _   _                         _         _                  _  ___ 
+| \ | | ___  _ __         __ _| |__  ___| |_ _ __ __ _  ___| ||__ \
+|  \| |/ _ \| '_ \ _____ / _` | '_ \/ __| __| '__/ _` |/ __| __|/ /
+| |\  | (_) | | | |_____| (_| | |_) \__ \ |_| | | (_| | (__| |_|_| 
+|_| \_|\___/|_| |_|      \__,_|_.__/|___/\__|_|  \__,_|\___|\__(_) 
+
+Even if ZUSTAND most represented by abstract concepts and forms of
+usage, it, as every other .NET package, can be used for much simple
+things, like debug or just testing and viewing the code, and if its
+makes the impression of very hard and big one, don't fear with experimenting.
+
+  ____                 _           _               
+ / ___|___  _ __   ___| |_   _ ___(_) ___  _ __    
+| |   / _ \| '_ \ / __| | | | / __| |/ _ \| '_ \   
+| |__| (_) | | | | (__| | |_| \__ \ | (_) | | | |_ 
+ \____\___/|_| |_|\___|_|\__,_|___/_|\___/|_| |_(_)
+
+Upon using this project to suit your one's unique requisites, it can be
+upgraded, refactored, improved, because projects like this would never,
+ever, stop advancing towards their final form and functionality.
