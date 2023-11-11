@@ -195,8 +195,7 @@ labels:
 
 # Milestones: define milestones for Issues and Pull Requests
 milestones:
-  - title: Public release of project
-    description: "A preparations and milestone, including everything to prepare for one final release to publish project as ready-to-use without any bugs, leaks, security problems and etc., doesn't mean that project won't be updated and etc."
+  - title: v0.1.0
     state: open
   #- title: milestone-title
     #description: milestone-description
@@ -231,7 +230,6 @@ teams:
     permission: admin
   - name: docs
     permission: push
-
 branches:
   - name: main
     # https://docs.github.com/en/rest/reference/repos#update-branch-protection
