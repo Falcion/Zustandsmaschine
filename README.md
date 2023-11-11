@@ -87,7 +87,6 @@ But, for contributing to this project, we highly recommending following those pr
 If you want to use this project, there are multiple ways to download-and-use this project: two “official” and direct, so, let's start from simplest official path:
 
 Process of installation within NUGET package manager in VS:
-<!-- REWRIRE THIS.-->
 
 1. Open project in IDE with .NET native-support;
 2. Use the specified package manager in your IDE (in VS - find this in upper hotbar):\
@@ -151,11 +150,11 @@ npm run prepare
 Roadmap
 -------
 
-- [ ] Create basic repository infrastructure for this project, including:
-  - [ ] basic .MD documentations and dealings stuff (like README, LICENSE and etc.);
-  - [ ] scripts and actions within CI/CD for supporting high-quality of this project;
-- [ ] Write and publish the demo (pre-release) version of project, including the most basic logic of this one.
-- [ ] Write the documentation for this demo-project and:
+- [x] Create basic repository infrastructure for this project, including:
+  - [x] basic .MD documentations and dealings stuff (like README, LICENSE and etc.);
+  - [x] scripts and actions within CI/CD for supporting high-quality of this project;
+- [x] Write and publish the demo (pre-release) version of project, including the most basic logic of this one.
+- [x] Write the documentation for this demo-project and:
   - [ ] make it one as archive for technical docs purposes (hyperlinking directive);
 - [ ] Refactor and prepare for “advancing” the project's logic and write an entire functionality of it.
 - [ ] Refactor and prepare for “advancing” the project's documentation and publish it via the archive.
