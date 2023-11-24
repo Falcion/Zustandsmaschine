@@ -59,6 +59,144 @@ repository:
 
 # Labels: define labels for Issues and Pull Requests
 labels:
+  - name: announcement 📣
+    color: '#0075ca'
+  - name: api-review/approved ✅
+    color: '#d73a4a'
+  - name: api-review/declined ❌
+    color: '#d73a4a'
+  - name: api-review/requested 🗳
+    color: '#d73a4a'
+  - name: api-review/reviewed
+    color: '#d73a4a'
+  - name: arch/arm
+    color: '#cfd3d7'
+  - name: arch/arm64
+    color: '#cfd3d7'
+  - name: arch/x64
+    color: '#cfd3d7'
+  - name: arch/x86
+    color: '#cfd3d7'
+  - name: backport/approved ✅ 
+    color: '#d876e3'
+  - name: backport/declined ❌
+    color: '#d876e3'
+  - name: backport/requested 🗳
+    color: '#d876e3'
+  - name: backport
+    color: '#b9927c'
+    description: 'Issue or pull request related to backport'
+  - name: blocked/need-info ❌
+    color: '#b60205'
+    description: 'Cannot proceed without more information'
+  - name: blocked/need-repro
+    color: '#b60205'
+    description: 'Needs a test case to reproduce the bug'
+  - name: blocked/upstream ❌
+    color: '#b60205'
+    description: 'Blocked on upstream'
+  - name: blocks-release
+    color: '#7057ff'
+    description: "Releases shouldn't go out without this fix"
+  - name: bug 🪲
+    color: '#e4e669'
+  - name: crash 💥
+    color: '#006b75'
+  - name: dependencies
+    color: '#a3452c'
+    description: 'Pull requests that update a dependency file'
+  - name: deprecation-review/complete ✅
+    color: '#e22801'
+  - name: deprecation-review/requested 📝
+    color: '#e22801'
+  - name: discussion
+    color: '#f463e9'
+  - name: not-merging
+    color: '#a21855'
+  - name: documentation 📓
+    color: '#a2eeef'
+  - name: duplicate
+    color: '#ffffff'
+  - name: enhancement ✨
+    color: '#008672'
+  - name: has-repro-comment
+    color: '#71a111'
+  - name: has-repro-gist
+    color: '#71a111'
+  - name: has-repro-repo
+    color: '#71a111'
+  - name: invalid
+    color: '#c3d22b'
+  - name: machine-dependent
+    color: '#704c92'
+  - name: machine
+    color: '#704c92'
+  - name: main
+    color: '#659c0b'
+  - name: security/memory
+    color: '#b160a1'
+  - name: security/data
+    color: '#b160a1'
+  - name: security/leak
+    color: '#b160a1'
+  - name: no-backport
+    color: '#05263e'
+  - name: performance 🏁
+    color: '#f7df40'
+  - name: platform/all
+    color: '#b79ccd'
+  - name: platform/linux
+    color: '#b79ccd'
+  - name: platform/macos
+    color: '#b79ccd'
+  - name: platform/windows
+    color: '#b79ccd'
+  - name: release
+    color: '#73a854'
+  - name: release-notes/highlight
+    color: '#c88887'
+  - name: release-notes/mentioning
+    color: '#c88887'
+  - name: release-notes/common
+    color: '#c88887'
+  - name: security 🔒
+    color: '#4287b9'
+  - name: semver/major
+    color: '#465341'
+  - name: semver/minor
+    color: '#465341'
+  - name: semver/none
+    color: '#465341'
+  - name: semver/patch
+    color: '#465341'
+  - name: stale
+    color: '#63b8ba'
+  - name: status/confirmed
+    color: '#c4c880'
+  - name: status/reviewed
+    color: '#c4c880'
+  - name: status/declined
+    color: '#c4c880'
+  - name: status/staling
+    color: '#c4c880'
+  - name: unsupported-version
+    color: '#10a9e7'
+  - name: WOA
+    color: '#94cbc1'
+  - name: WIP
+    color: '#b89022'
+  - name: WONTFIX
+    color: '#9f24fa'
+  - name: question
+    color: '#5bb222'
+  - name: repository
+    color: '#1bd867'
+  - name: repository/javascripts
+    color: '#1bd867'
+  - name: repository/pages
+    color: '#1bd867'
+  - name: repository/other
+    color: '#1bd867'
   #- name: 
   #  color: ''
   #  description:
@@ -100,7 +238,7 @@ teams:
     permission: admin
   - name: docs
     permission: push
-
+    
 branches:
   - name: main
     # https://docs.github.com/en/rest/reference/repos#update-branch-protection
