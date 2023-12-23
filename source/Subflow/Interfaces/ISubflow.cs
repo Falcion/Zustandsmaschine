@@ -28,6 +28,6 @@ namespace Zustand.Subflow.Interfaces
         public void Nullify();
 
         public void Reidentify(long key);
-        public void Reidentify(long key, int coef);    
+        public void Reidentify(long key, int coef);
     }
 }

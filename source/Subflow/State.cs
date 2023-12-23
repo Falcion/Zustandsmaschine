@@ -62,6 +62,30 @@
             _stable = stable;
         }
 
+        public static State GetFromDefaults(string designation)
+        {
+            string upper_designation = designation.ToUpper();
+
+            return upper_designation switch
+            {
+                "UNKNOWN" => UNKNOWN,
+                "SKIPPED" => SKIPPED,
+                "PENDING" => PENDING,
+                "FAILED" => FAILED,
+                "STAGED" => STAGED,
+                "ITERATING" => ITERATING,
+                "PROCESSING" => PROCESSING,
+                "SUCCESSFUL" => SUCCESSFUL,
+                "INTERRUPTED" => INTERRUPTED,
+                _ => EMPTY_STATE,
+            };
+        }
+
+        public static ISubflow GetInterfaces(string designation)
+        {
+            return (GetFromDefaults(designation) as ISubflow);
+        }
+
         public static State UNKNOWN { get; } = new("Unknown", 0, true);
         public static State SKIPPED { get; } = new("Skipped", 1, true);
         public static State PENDING { get; } = new("Pending", 2, true);

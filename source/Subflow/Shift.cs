@@ -62,6 +62,32 @@
             _stable = stable;
         }
 
+        public static Shift GetFromDefaults(string designation)
+        {
+            string upper_designation = designation.ToUpper();
+
+            return upper_designation switch
+            {
+                "BEGIN" => BEGIN,
+                "PAUSE" => PAUSE,
+                "RESUME" => RESUME,
+                "EXIT" => EXIT,
+                "STOP" => STOP,
+                "SKIP" => SKIP,
+                "PHASE" => PHASE,
+                "STAGE" => STAGE,
+                "MOMENTUM" => MOMENTUM,
+                "ROLLBACK" => ROLLBACK,
+                "TIMEOUT" => TIMEOUT,
+                _ => EMPTY_SHIFT,
+            };
+        }
+
+        public static ISubflow GetInterfaces(string designation)
+        {
+            return (GetFromDefaults(designation) as ISubflow);
+        }
+
         public static Shift BEGIN { get; } = new("Begin", 0, true);
         public static Shift PAUSE { get; } = new("Pause", 1, true);
         public static Shift RESUME { get; } = new("Resume", 2, true);
