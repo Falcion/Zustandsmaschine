@@ -1,10 +1,13 @@
 ﻿namespace Zustand.Machine
 {
+    using Zustand.Machine.Exceptions;
+
     using Zustand.Subflow;
     using Zustand.Subflow.Interfaces;
 
     using Zustand.Flow;
-    using Zustand.Machine.Exceptions;
+
+    using Zustand.Data;
     using Zustand.Data.Types;
 
     /// <summary>
@@ -36,9 +39,9 @@
         private ulong _flag = 0;
 
         /// <summary>
-        /// An instance of a class of <see cref="Addons.Kohender"/> in current instance of the machine which instantiates the rebroker system
+        /// An instance of a class of <see cref="Addons.Deployment"/> in current instance of the machine which instantiates the rebroker system
         /// </summary>
-        private readonly Addons.Kohender _kohender = new();
+        private readonly Addons.Deployment _kohender = new();
         /// <summary>
         /// An instance of a class of <see cref="Addons.Observer"/> in current instance of the machine which instantiates the reholder system 
         /// </summary>
@@ -73,9 +76,9 @@
         public ulong Flag => _flag;
 
         /// <summary>
-        /// An instance of a class of <see cref="Addons.Kohender"/> in current instance of the machine which instantiates the rebroker system
+        /// An instance of a class of <see cref="Addons.Deployment"/> in current instance of the machine which instantiates the rebroker system
         /// </summary>
-        public Addons.Kohender Kohender => _kohender;
+        public Addons.Deployment Kohender => _kohender;
         /// <summary>
         /// An instance of a class of <see cref="Addons.Observer"/> in current instance of the machine which instantiates the reholder system 
         /// </summary>
@@ -324,6 +327,9 @@
     /// </typeparam>
     public class Assembler<T> : Assembler where T : notnull
     {
-        public Tupple<T> Heartbeat { get; set; }
+        /// <summary>
+        /// An instance value of <see cref="Pair{T}"/> within two generic values which represents inner cycle of finite automaton
+        /// </summary>
+        public Pair<T>? Heartbeat { get; set; } = new();
     }
 }
