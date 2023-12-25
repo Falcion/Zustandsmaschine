@@ -6,16 +6,22 @@ using System.Threading.Tasks;
 
 namespace Zustand.Machine.Addons
 {
-    public class Deployment
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Broker
     {
-        public Deployment() { }
+        /// <summary>
+        /// 
+        /// </summary>
+        public Broker() { }
     }
 
     /// <summary>
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Deployment<T> : Deployment where T : notnull
+    public class Broker<T> : Broker where T : notnull
     {
         /// <summary>
         /// 
@@ -26,7 +32,7 @@ namespace Zustand.Machine.Addons
         /// 
         /// </summary>
         /// <param name="container"></param>
-        public Deployment(T? container) : base()
+        public Broker(T? container) : base()
         { this.Container = container; }
 
         /// <summary>

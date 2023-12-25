@@ -39,13 +39,13 @@
         private ulong _flag = 0;
 
         /// <summary>
-        /// An instance of a class of <see cref="Addons.Deployment"/> in current instance of the machine which instantiates the rebroker system
+        /// An instance of a class of <see cref="Addons.Broker"/> in current instance of the machine which instantiates the rebroker system
         /// </summary>
-        private readonly Addons.Deployment _kohender = new();
+        private readonly Addons.Broker _broker = new();
         /// <summary>
-        /// An instance of a class of <see cref="Addons.Observer"/> in current instance of the machine which instantiates the reholder system 
+        /// An instance of a class of <see cref="Addons.Sender"/> in current instance of the machine which instantiates the reholder system 
         /// </summary>
-        private readonly Addons.Observer _observer = new();
+        private readonly Addons.Sender _sender = new();
 
         /// <summary>
         /// A static instance-value of <see cref="Assembler"/> which represents empty assembler without any defined parameters
@@ -76,13 +76,13 @@
         public ulong Flag => _flag;
 
         /// <summary>
-        /// An instance of a class of <see cref="Addons.Deployment"/> in current instance of the machine which instantiates the rebroker system
+        /// An instance of a class of <see cref="Addons.Broker"/> in current instance of the machine which instantiates the rebroker system
         /// </summary>
-        public Addons.Deployment Kohender => _kohender;
+        public Addons.Broker Broker => _broker;
         /// <summary>
-        /// An instance of a class of <see cref="Addons.Observer"/> in current instance of the machine which instantiates the reholder system 
+        /// An instance of a class of <see cref="Addons.Sender"/> in current instance of the machine which instantiates the reholder system 
         /// </summary>
-        public Addons.Observer Observer => _observer;
+        public Addons.Sender Sender => _sender;
 
         /// <summary>
         /// Instance constructor for the class
@@ -111,8 +111,8 @@
             _data = assembler.Data;
             _flag = assembler.Flag;
 
-            _kohender = assembler.Kohender;
-            _observer = assembler.Observer;
+            _broker = assembler.Broker;
+            _sender = assembler.Sender;
         }
 
         /// <summary>
@@ -178,8 +178,8 @@
                 _data = assembler.Data;
                 _flag = assembler.Flag;
 
-                _kohender = assembler.Kohender;
-                _observer = assembler.Observer;
+                _broker = assembler.Broker;
+                _sender = assembler.Sender;
             }
         }
 
@@ -220,8 +220,8 @@
                 _data = assembler.Data;
                 _flag = assembler.Flag;
 
-                _kohender = assembler.Kohender;
-                _observer = assembler.Observer;
+                _broker = assembler.Broker;
+                _sender = assembler.Sender;
             }
         }
 
@@ -252,8 +252,8 @@
                 _data = assembler.Data;
                 _flag = assembler.Flag;
 
-                _kohender = assembler.Kohender;
-                _observer = assembler.Observer;
+                _broker = assembler.Broker;
+                _sender = assembler.Sender;
             }
         }
 
@@ -299,8 +299,8 @@
                 _data = assembler.Data;
                 _flag = assembler.Flag;
 
-                _kohender = assembler.Kohender;
-                _observer = assembler.Observer;
+                _broker = assembler.Broker;
+                _sender = assembler.Sender;
             }
         }
 

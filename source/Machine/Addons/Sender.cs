@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Zustand.Machine.Addons
 {
-    public class Observer
+    public class Sender
     {
-        public Observer() { }
+        public Sender() { }
     }
 }
