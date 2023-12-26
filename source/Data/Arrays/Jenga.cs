@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Zustand.Data.Arrays 
 {
@@ -441,14 +442,98 @@ namespace Zustand.Data.Arrays
     /// <summary>
     /// A class which represents an unique array data structure reminiscent of the structure of the same name
     /// </summary>
-    /// <typeparam name="K">
+    /// <typeparam name="TKey">
     /// A generic type which defines type of keys with which by array structure will contain generic values of it
     /// </typeparam>
-    /// <typeparam name="T">
+    /// <typeparam name="TValue">
     /// A generic type which defines type of value which array structure will storage as it's values
     /// </typeparam>
-    public class Jenga<K, T> : IDictionary<K, T>, ICloneable where K : notnull 
+    public class Jenga<TKey, TValue> : IDictionary<TKey, TValue>, ICloneable where TKey : notnull 
     {
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        public Jenga() { }
 
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="capacity">
+        /// A signed 32-bit integer value which represents the initial specified capacity both for internal items and controllers collections
+        /// </param>
+        public Jenga(int capacity)
+        {
+            Items = new(capacity);
+
+            Controllers = new(capacity);
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="collection">
+        /// An instance of <see cref="ICollection{TValue}"/> from which current constructor generate the new instance
+        /// </param>
+        [Obsolete("An instance of this type does not inherit from the collection interface, so this constructor is not recommended for use.")]
+        public Jenga(ICollection<TValue> collection)
+        {
+            Items = new(collection);
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="dictionary">
+        /// An instance of <see cref="IDictionary{TKey, TValue}"/> which represents an base of any <see cref="Dictionary{TKey, TValue}"/>
+        /// </param>
+        public Jenga(IDictionary<TKey, TValue> dictionary)
+        {
+            Items = new(dictionary.Values);
+
+            Controllers = new(dictionary);
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="dictionary">
+        /// An instance of <see cref="IEnumerable{T}"/> where generic type <see href="T"/> is represented by <see cref="KeyValuePair{TKey, TValue}"/> which represents an base of any <see cref="Dictionary{TKey, TValue}"/>
+        /// </param>
+        public Jenga(IEnumerable<KeyValuePair<TKey, TValue>> dictionary)
+        {
+            /* Using LINQ to take every value from pair of key-value from given interface. */
+            Items = new(dictionary.Select(x => 
+                                          x.Value));
+
+            Controllers = new(dictionary);
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="instance">
+        /// An instance of <see cref="Jenga{TKey, TValue}"/> which represents another instance from which this one would be built
+        /// </param>
+        public Jenga(Jenga<TKey, TValue> instance)
+        {
+            Items = instance.Items;
+
+            Controllers = instance.Controllers;
+        }
+
+        /// <summary>
+        /// A signed 32-bit integer value which represents number of elements inside the <see cref="List{TValue}"/> of inner instance
+        /// </summary>
+        public int Count => Items.Count;
+
+        /// <summary>
+        /// An instance of <see cref="List{TValue}"/> which represents values which current instance holds
+        /// </summary>
+        public List<TValue> Items { get; } = new();
+
+        /// <summary>
+        /// An instance of <see cref="Dictionary{TKey, TValue}"/> which represents keys paired with values ressembling the identifiers of every value in current instance
+        /// </summary>
+        public Dictionary<TKey, TValue> Controllers { get; } = new();
     }
 }
