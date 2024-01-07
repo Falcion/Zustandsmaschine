@@ -11,7 +11,7 @@
     public class Pair<T> : IData
     {
         /// <summary>
-        /// A generic type <see href="T"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </summary>
         public T? Param1 { get; set; } = default;
         /// <summary>

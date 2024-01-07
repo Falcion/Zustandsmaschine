@@ -11,7 +11,7 @@
     public class Singleton<T> : IData
     {
         /// <summary>
-        /// A generic type <see href="T"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </summary>
         public T? Param { get; set; } = default;
 
@@ -24,7 +24,7 @@
         /// Instance constructor for the class
         /// </summary>
         /// <param name="param">
-        /// A generic type <see href="T"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </param>
         public Singleton(T? param)
         {
@@ -37,9 +37,7 @@
         /// <exception cref="NotSupportedException">
         /// Thrown via any form of usage of this method in this class.
         /// </exception>
-#pragma warning disable S1133
         [Obsolete("Singleton instance can't support methods for more than one-parameter interactions.", true)]
-#pragma warning restore S1133
         public void Swap()
         {
             throw new NotSupportedException("Singleton instance can't support methods for more than one-parameter interactions.");
@@ -51,9 +49,7 @@
         /// <exception cref="NotSupportedException">
         /// Thrown via any form of usage of this method in this class.
         /// </exception>
-#pragma warning disable S1133
         [Obsolete("Singleton instance can't support methods for more than one-parameter interactions.", true)]
-#pragma warning restore S1133
         public void Move()
         {
             throw new NotSupportedException("Singleton instance can't support methods for more than one-parameter interactions.");
@@ -64,7 +60,7 @@
         /// </summary>
         public void Nullify()
         {
-            Param = default(T?);
+            Param = default;
         }
     }
 }

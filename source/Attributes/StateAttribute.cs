@@ -1,7 +1,8 @@
-﻿using System.Security.Cryptography;
-using System.Security;
+﻿using System;
 using System.Text;
-using System;
+
+using System.Security;
+using System.Security.Cryptography;
 
 namespace Zustand.Attributes
 {
@@ -25,9 +26,9 @@ namespace Zustand.Attributes
         public byte[]? Data => _data;
 
         /// <summary>
-        /// A dynamic type object which represents the object marker for current instance of attribute
+        /// An <see cref="Object"/> type object which represents the object marker for current instance of attribute
         /// </summary>
-        public dynamic[]? Marker { get; set; }
+        public object[]? Marker { get; set; }
 
         /// <summary>
         /// A signed 32-bit integer value representing the logical sign of an attribute
@@ -40,7 +41,7 @@ namespace Zustand.Attributes
         /// <param name="marker">
         /// A dynamic type object which represents the object marker for current instance of attribute
         /// </param>
-        public StateAttribute(dynamic[]? marker)
+        public StateAttribute(object[]? marker)
         {
             Marker = marker;
 
@@ -57,7 +58,7 @@ namespace Zustand.Attributes
         /// </param>
         public StateAttribute(ISubflowAttribute attr)
         {
-            _attr = attr;
+            Attr = attr;
             _data = attr.Data;
 
             Marker = attr.Marker;
@@ -71,7 +72,7 @@ namespace Zustand.Attributes
         /// </param>
         public void Rematch(StateAttribute attribute)
         {
-            _attr = attribute;
+            Attr = attribute;
             _data = attribute.Data;
 
             Marker = attribute.Marker;
@@ -91,6 +92,7 @@ namespace Zustand.Attributes
             if (string.IsNullOrEmpty(data))
                 return Array.Empty<byte>();
 
+#pragma warning disable IDE0063
             using (MD5 _MD5 = MD5.Create())
             {
                 _MD5.Initialize();
@@ -101,11 +103,12 @@ namespace Zustand.Attributes
 
                 return hash;
             }
+#pragma warning restore IDE0063
         }
 
         /// <summary>
         /// An inner instance of interface for subflow attribute as common instance
         /// </summary>
-        public ISubflowAttribute? _attr { get; private set; }
+        public ISubflowAttribute? Attr { get; private set; }
     }
 }

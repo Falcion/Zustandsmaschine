@@ -541,36 +541,36 @@
     public class Stateflow<T> : Stateflow where T : notnull
     {
         /// <summary>
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </summary>
-        public T? Designation { get; set; } = default(T);
+        public T? Designation { get; set; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         public Stateflow(T designation) : base()
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="state">
         /// An instance of <see cref="Subflow.State"/> which represents the shift of the current instance 
         /// </param>
         public Stateflow(T designation, State state) : base(state)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="state">
         /// An instance of <see cref="Subflow.State"/> which represents the shift of the current instance 
@@ -580,13 +580,13 @@
         /// </param>
         public Stateflow(T designation, State state, Transdefs transdefinition) : base(state, 
                                                                                        transdefinition)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="state">
         /// An instance of <see cref="Subflow.State"/> which represents the shift of the current instance 
@@ -599,13 +599,13 @@
         /// </param>
         public Stateflow(T designation, State state, Stateflow inner, bool is_defined = false) : base(state, 
                                                                                                       inner, is_defined)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="state">
         /// An instance of <see cref="Subflow.State"/> which represents the shift of the current instance 
@@ -619,19 +619,19 @@
         public Stateflow(T designation, State state, Stateflow inner, Transdefs transdefinition) : base(state, 
                                                                                                         inner, 
                                                                                                         transdefinition)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="shift">
         /// An instance of <see cref="Subflow.Shift"/> which represents the shift of the current instance 
         /// </param>
         public Stateflow(T designation, Shift shift) : base(shift)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
@@ -645,13 +645,13 @@
         /// </param>
         public Stateflow(T designation, Shift shift, Transdefs transdefinition) : base(shift, 
                                                                                        transdefinition)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="shift">
         /// An instance of <see cref="Subflow.Shift"/> which represents the shift of the current instance 
@@ -664,13 +664,13 @@
         /// </param>
         public Stateflow(T designation, Shift shift, Stateflow inner, bool is_defined = false) : base(shift, 
                                                                                                       inner, is_defined)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="shift">
         /// An instance of <see cref="Subflow.Shift"/> which represents the shift of the current instance 
@@ -684,13 +684,13 @@
         public Stateflow(T designation, Shift shift, Stateflow inner, Transdefs transdefinition) : base(shift, 
                                                                                                         inner, 
                                                                                                         transdefinition)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="inner">
         /// An instance of <see cref="Stateflow"/> which represents inner stateflow
@@ -699,13 +699,13 @@
         /// Boolean parameter which defines does stateflow is using transdefinitions in it's behaviour
         /// </param>
         public Stateflow(T designation, Stateflow inner, bool is_defined = false) : base(inner, is_defined)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="inner">
         /// An instance of <see cref="Stateflow"/> which represents inner stateflow
@@ -715,13 +715,13 @@
         /// </param>
         public Stateflow(T designation, Stateflow inner, Transdefs transdefinition) : base(inner,
                                                                                            transdefinition)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="inner">
         /// An instance of <see cref="Stateflow"/> which represents inner stateflow
@@ -738,13 +738,13 @@
         public Stateflow(T designation, Stateflow inner, State state, Shift shift, bool is_defined = false) : base(inner, 
                                                                                                                    state, 
                                                                                                                    shift, is_defined)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="inner">
         /// An instance of <see cref="Stateflow"/> which represents inner stateflow
@@ -762,13 +762,13 @@
                                                                                                                      state, 
                                                                                                                      shift, 
                                                                                                                      transdefinition)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="transdefinition">
         /// An instance of <see cref="Subflow.Transdefs"/> which represents the side effects of transdefinitions between states of inner instance
@@ -777,13 +777,13 @@
         /// Boolean parameter which defines would be instance created with empty instances of state and shift or not
         /// </param>
         public Stateflow(T designation, Transdefs transdefinition, bool recompile = false) : base(transdefinition, recompile)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         /// <param name="state">
         /// An instance of <see cref="Subflow.State"/> which represents the shift of the current instance 
@@ -794,13 +794,13 @@
         public Stateflow(T designation, State state,
                                         Shift shift) : base(state,
                                                             shift)
-        { Designation = designation; }
+           { Designation = designation; }
 
         /// <summary>
         /// Method which redefines the value of the designation of the instance of the <see cref="Stateflow{T}"/> 
         /// </summary>
         /// <param name="designation">
-        /// A generic type <see href="T"/> value representing designation of the instance of the stateflow
+        /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         public void Reassign(T? designation)
                => Designation = designation;
