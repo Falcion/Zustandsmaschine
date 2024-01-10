@@ -1,43 +1,78 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Zustand.Machine.Addons
+﻿namespace Zustand.Machine.Addons
 {
-    /// <summary>
-    /// 
-    /// </summary>
+    using Zustand.Data;
+    using Zustand.Data.Types;
+    using Zustand.Data.Arrays;
+
     public class Broker
     {
-        /// <summary>
-        /// 
-        /// </summary>
+        private string _name { get; } = string.Empty;
+
+        private Int64 _id { get; } = 0;
+
+        private Int64 _codes=0;
+        private Int64 _scope=0;
+
+        private Jenga<string> _activity { get; } = new();
+
+        private bool is_disposed = false;
+
         public Broker() { }
+
+        public Broker(string name)
+        {
+            _name = name;
+        }
+
+        public Broker(string name, long id)
+        {
+            _name = name;
+
+            _id = id;
+        }
+
+        public Broker(string name, long id, long codes,
+                                            long scope) : this(name, id)
+        {
+            _codes = codes;
+            _scope = scope;
+
+            /*! TO-DO: write here an advertisment about using DIRECT-DIRECT APPROACH */
+        }
+
+        private void Reconfigure(Pair<Int64> codepair)
+        {
+            _codes = codepair.Param1;
+            _scope = codepair.Param2;
+        }
+
+        private void Reconfigure(Pair<Int64> codepair, bool is_disposed)
+        {
+            Reconfigure(codepair);
+
+            this.is_disposed = is_disposed;
+        }
+
+        public string Name => _name;
+
+        public Int64 ID => _id;
+
+        public Int64 Codes => _codes;
+        public Int64 Scope => _scope;
+
+        public Jenga<string> Activity => _activity;
+
+        public bool Disposed => is_disposed;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public class Broker<T> : Broker where T : notnull
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public T? Container { get; set; } = default;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
+        public T? Container { get; set; }
+
         public Broker(T? container) : base()
-        { this.Container = container; }
+           { Container = container; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public void Renullify()
                 => Container = default;
     }

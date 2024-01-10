@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Zustand.Machine.Exceptions
+﻿namespace Zustand.Machine.Exceptions
 {
     /// <summary>
     /// An exception instance which represents exception thrown when the assembler is null or empty

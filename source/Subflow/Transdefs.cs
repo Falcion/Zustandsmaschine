@@ -1,7 +1,4 @@
-﻿using System;
-using System.Transactions;
-
-namespace Zustand.Subflow
+﻿namespace Zustand.Subflow
 {
     /// <summary>
     /// A class which represents the transdefinitions between instances of the <see cref="Flow.Stateflow"/>

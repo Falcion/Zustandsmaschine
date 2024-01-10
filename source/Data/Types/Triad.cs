@@ -11,15 +11,15 @@
     public class Triad<T> : IData
     {
         /// <summary>
-        /// A generic type <see href="T"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </summary>
         public T? Param1 { get; set; } = default;
         /// <summary>
-        /// A generic type <see href="T"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </summary>
         public T? Param2 { get; set; } = default;
         /// <summary>
-        /// A generic type <see href="T"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </summary>
         public T? Param3 { get; set; } = default;
 
@@ -32,13 +32,13 @@
         /// Instance constructor for the class
         /// </summary>
         /// <param name="param1">
-        /// A generic type <see href="T"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </param>
         /// <param name="param2">
-        /// A generic type <see href="T"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </param>
         /// <param name="param3">
-        /// A generic type <see href="T"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </param>
         public Triad(T? param1, T? param2, T? param3)
         {
@@ -86,15 +86,15 @@
     public class Triad<K, V> : IData
     {
         /// <summary>
-        /// A generic type <see href="K"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="K"/> value representing one of parameters in the data type
         /// </summary>
         public K? Param1 { get; set; } = default;
         /// <summary>
-        /// A generic type <see href="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="V"/> value representing one of parameters in the data type
         /// </summary>
         public V? Param2 { get; set; } = default;
         /// <summary>
-        /// A generic type <see href="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="V"/> value representing one of parameters in the data type
         /// </summary>
         public V? Param3 { get; set; } = default;
 
@@ -107,13 +107,13 @@
         /// Instance constructor for the class
         /// </summary>
         /// <param name="param1">
-        /// A generic type <see href="K"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="K"/> value representing one of parameters in the data type
         /// </param>
         /// <param name="param2">
-        /// A generic type <see href="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="V"/> value representing one of parameters in the data type
         /// </param>
         /// <param name="param3">
-        /// A generic type <see href="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="V"/> value representing one of parameters in the data type
         /// </param>
         public Triad(K? param1, V? param2, V? param3)
         {
@@ -170,15 +170,15 @@
     public class Triad<K, V, U> : IData
     {
         /// <summary>
-        /// A generic type <see href="K"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="K"/> value representing one of parameters in the data type
         /// </summary>
         public K? Param1 { get; set; } = default;
         /// <summary>
-        /// A generic type <see href="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="V"/> value representing one of parameters in the data type
         /// </summary>
         public V? Param2 { get; set; } = default;
         /// <summary>
-        /// A generic type <see href="U"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="U"/> value representing one of parameters in the data type
         /// </summary>
         public U? Param3 { get; set; } = default;
 
@@ -191,13 +191,13 @@
         /// Instance constructor for the class
         /// </summary>
         /// <param name="param1">
-        /// A generic type <see href="K"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="K"/> value representing one of parameters in the data type
         /// </param>
         /// <param name="param2">
-        /// A generic type <see href="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="V"/> value representing one of parameters in the data type
         /// </param>
         /// <param name="param3">
-        /// A generic type <see href="U"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="U"/> value representing one of parameters in the data type
         /// </param>
         public Triad(K? param1, V? param2, U? param3)
         {

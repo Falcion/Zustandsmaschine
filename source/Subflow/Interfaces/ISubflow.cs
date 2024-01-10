@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Zustand.Subflow.Interfaces
+﻿namespace Zustand.Subflow.Interfaces
 {
     /// <summary>
     /// An interface which represents instance for subflow common data type

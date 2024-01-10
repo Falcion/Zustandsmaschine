@@ -18,7 +18,8 @@ on:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
   schedule:
-    - cron: '0 0 * * *'
+  #Runs at 00:00, only on Monday.
+    - cron: '0 0 * * 1'
 
 jobs:
   analyze:

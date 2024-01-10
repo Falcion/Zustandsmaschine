@@ -11,8 +11,8 @@
         public byte[]? Data { get; }
 
         /// <summary>
-        /// A dynamic type object which represents the object marker for current instance of attribute
+        /// An <see cref="Object"/> type object which represents the object marker for current instance of attribute
         /// </summary>
-        public dynamic[]? Marker { get; set; }
+        public object[]? Marker { get; set; }
     }
 }
