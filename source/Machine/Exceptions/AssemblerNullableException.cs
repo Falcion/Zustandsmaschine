@@ -3,7 +3,9 @@
     /// <summary>
     /// An exception instance which represents exception thrown when the assembler is null or empty
     /// </summary>
+#pragma warning disable S3925
     public class AssemblerNullableException : Exception
+#pragma warning restore S3925
     {
         /// <summary>
         /// A nullable instance of class which represents assembler in which exception was caused

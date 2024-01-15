@@ -3,6 +3,14 @@
     using Zustand.Data.Types.Interfaces;
 
     /// <summary>
+    /// A non-generic dynamic representation of <see cref="Triad{T}"/> which holds <see cref="Object"/> as it's primary type
+    /// </summary>
+    public class Triad : Triad<object>
+    {
+        /* Not-implemented code. */
+    }
+
+    /// <summary>
     /// A class which represents a non-static container for three values
     /// </summary>
     /// <typeparam name="T">
@@ -40,11 +48,76 @@
         /// <param name="param3">
         /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </param>
-        public Triad(T? param1, T? param2, T? param3)
+        public Triad(T? param1, 
+                     T? param2, 
+                     T? param3)
         {
             Param1 = param1;
             Param2 = param2;
             Param3 = param3;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="singleton1">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T"/> value representing one of parameters in the data type
+        /// </param>
+        /// <param name="singleton2">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T"/> value representing one of parameters in the data type
+        /// </param>
+        /// <param name="singleton3">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T"/> value representing one of parameters in the data type
+        /// </param>
+        public Triad(Singleton<T> singleton1,
+                     Singleton<T> singleton2,
+                     Singleton<T> singleton3)
+        {
+            Param1 = singleton1.Param;
+            Param2 = singleton2.Param;
+            Param3 = singleton3.Param;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="other">
+        /// An instance of <see cref="Triad{T}"/> from which current one will be constructed
+        /// </param>
+        public Triad(Triad<T> other)
+        {
+            Param1 = other.Param1;
+            Param2 = other.Param2;
+            Param3 = other.Param3;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="tuple">
+        /// An instance of <see cref="Tuple{T1, T2, T3}"/> which contains correspondive number of values for current instance
+        /// </param>
+        public Triad(Tuple<T, T, T> tuple)
+        {
+            Param1 = tuple.Item1;
+            Param2 = tuple.Item2;
+            Param3 = tuple.Item3;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="pair">
+        /// An instance of <see cref="Pair{T}"/> which contains two values for current instance
+        /// </param>
+        /// <param name="param">
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
+        /// </param>
+        public Triad(Pair<T> pair, T param)
+        {
+            Param1 = pair.Param1;
+            Param2 = pair.Param2;
+            Param3 = param;
         }
 
         /// <summary>
@@ -77,26 +150,26 @@
     /// <summary>
     /// A class which represents a non-static container for three values
     /// </summary>
-    /// <typeparam name="K">
+    /// <typeparam name="T1">
     /// A generic type which defines type of one value which container will storage
     /// </typeparam>
-    /// <typeparam name="V">
+    /// <typeparam name="T2">
     /// A generic type which defines type of both values which container will storage
     /// </typeparam>
-    public class Triad<K, V> : IData
+    public class Triad<T1, T2> : IData
     {
         /// <summary>
-        /// A generic type <typeparamref name="K"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
         /// </summary>
-        public K? Param1 { get; set; } = default;
+        public T1? Param1 { get; set; } = default;
         /// <summary>
-        /// A generic type <typeparamref name="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T2"/> value representing one of parameters in the data type
         /// </summary>
-        public V? Param2 { get; set; } = default;
+        public T2? Param2 { get; set; } = default;
         /// <summary>
-        /// A generic type <typeparamref name="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T2"/> value representing one of parameters in the data type
         /// </summary>
-        public V? Param3 { get; set; } = default;
+        public T2? Param3 { get; set; } = default;
 
         /// <summary>
         /// Instance constructor for the class
@@ -107,15 +180,17 @@
         /// Instance constructor for the class
         /// </summary>
         /// <param name="param1">
-        /// A generic type <typeparamref name="K"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
         /// </param>
         /// <param name="param2">
-        /// A generic type <typeparamref name="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T2"/> value representing one of parameters in the data type
         /// </param>
         /// <param name="param3">
-        /// A generic type <typeparamref name="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T2"/> value representing one of parameters in the data type
         /// </param>
-        public Triad(K? param1, V? param2, V? param3)
+        public Triad(T1? param1, 
+                     T2? param2, 
+                     T2? param3)
         {
             Param1 = param1;
             Param2 = param2;
@@ -123,12 +198,104 @@
         }
 
         /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="singleton1">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T1"/> value representing one of parameters in the data type
+        /// </param>
+        /// <param name="singleton2">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T2"/> value representing one of parameters in the data type
+        /// </param>
+        /// <param name="singleton3">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T2"/> value representing one of parameters in the data type
+        /// </param>
+        public Triad(Singleton<T1> singleton1,
+                     Singleton<T2> singleton2,
+                     Singleton<T2> singleton3)
+        {
+            Param1 = singleton1.Param;
+            Param2 = singleton2.Param;
+            Param3 = singleton3.Param;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="other">
+        /// An instance of <see cref="Triad{T1, T2}"/> from which current one will be constructed
+        /// </param>
+        public Triad(Triad<T1, T2> other)
+        {
+            Param1 = other.Param1;
+            Param2 = other.Param2;
+            Param3 = other.Param3;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="tuple">
+        /// An instance of <see cref="Tuple{T1, T2, T3}"/> which contains correspondive number of values for current instance
+        /// </param>
+        public Triad(Tuple<T1, T2, T2> tuple)
+        {
+            Param1 = tuple.Item1;
+            Param2 = tuple.Item2;
+            Param3 = tuple.Item3;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="tuple">
+        /// An instance of <see cref="Tuple{T1, T2, T3}"/> which contains correspondive number of values for current instance
+        /// </param>
+        public Triad(Tuple<T2, T1, T2> tuple)
+        {
+            Param1 = tuple.Item2;
+            Param2 = tuple.Item1;
+            Param3 = tuple.Item3;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="pair">
+        /// An instance of <see cref="Pair{T}"/> which contains two values for current instance
+        /// </param>
+        /// <param name="param">
+        /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
+        /// </param>
+        public Triad(Pair<T2> pair, T1 param)
+        {
+            Param1 = param;
+            Param2 = pair.Param1;
+            Param3 = pair.Param2;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="pair">
+        /// An instance of <see cref="Pair{T1, T2}"/> which contains two values for current instance
+        /// </param>
+        /// <param name="param">
+        /// A generic type <typeparamref name="T2"/> value representing one of parameters in the data type
+        /// </param>
+        public Triad(Pair<T1, T2> pair, T2 param)
+        {
+            Param1 = pair.Param1;
+            Param2 = pair.Param2;
+            Param3 = param;
+        }
+
+        /// <summary>
         /// Method which converts and swaps first and last values inside the current instance
         /// </summary>
         public void Swap()
         {
-            var convert_param1 = (K?)Convert.ChangeType(Param3, typeof(K));
-            var convert_param3 = (V?)Convert.ChangeType(Param1, typeof(V));
+            var convert_param1 = (T1?)Convert.ChangeType(Param3, typeof(T1));
+            var convert_param3 = (T2?)Convert.ChangeType(Param1, typeof(T2));
 
             (Param1, Param3) = (convert_param1, convert_param3);
         }
@@ -138,8 +305,8 @@
         /// </summary>
         public void Move()
         {
-            var convert_param1 = (K?)Convert.ChangeType(Param2, typeof(K));
-            var convert_param3 = (V?)Convert.ChangeType(Param1, typeof(V));
+            var convert_param1 = (T1?)Convert.ChangeType(Param2, typeof(T1));
+            var convert_param3 = (T2?)Convert.ChangeType(Param1, typeof(T2));
 
             (Param1, Param2, Param3) = (convert_param1, Param3, convert_param3);
         }
@@ -158,29 +325,29 @@
     /// <summary>
     /// A class which represents a non-static container for three values
     /// </summary>
-    /// <typeparam name="K">
+    /// <typeparam name="T1">
     /// A generic type which defines type of one value which container will storage
     /// </typeparam>
-    /// <typeparam name="V">
+    /// <typeparam name="T2">
     /// A generic type which defines type of one value which container will storage
     /// </typeparam>
-    /// <typeparam name="U">
+    /// <typeparam name="T3">
     /// A generic type which defines type of one value which container will storage
     /// </typeparam>
-    public class Triad<K, V, U> : IData
+    public class Triad<T1, T2, T3> : IData
     {
         /// <summary>
-        /// A generic type <typeparamref name="K"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
         /// </summary>
-        public K? Param1 { get; set; } = default;
+        public T1? Param1 { get; set; } = default;
         /// <summary>
-        /// A generic type <typeparamref name="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T2"/> value representing one of parameters in the data type
         /// </summary>
-        public V? Param2 { get; set; } = default;
+        public T2? Param2 { get; set; } = default;
         /// <summary>
-        /// A generic type <typeparamref name="U"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T3"/> value representing one of parameters in the data type
         /// </summary>
-        public U? Param3 { get; set; } = default;
+        public T3? Param3 { get; set; } = default;
 
         /// <summary>
         /// Instance constructor for the class
@@ -191,15 +358,17 @@
         /// Instance constructor for the class
         /// </summary>
         /// <param name="param1">
-        /// A generic type <typeparamref name="K"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
         /// </param>
         /// <param name="param2">
-        /// A generic type <typeparamref name="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T2"/> value representing one of parameters in the data type
         /// </param>
         /// <param name="param3">
-        /// A generic type <typeparamref name="U"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T3"/> value representing one of parameters in the data type
         /// </param>
-        public Triad(K? param1, V? param2, U? param3)
+        public Triad(T1? param1, 
+                     T2? param2, 
+                     T3? param3)
         {
             Param1 = param1;
             Param2 = param2;
@@ -207,12 +376,75 @@
         }
 
         /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="singleton1">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T1"/> value representing one of parameters in the data type
+        /// </param>
+        /// <param name="singleton2">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T2"/> value representing one of parameters in the data type
+        /// </param>
+        /// <param name="singleton3">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T3"/> value representing one of parameters in the data type
+        /// </param>
+        public Triad(Singleton<T1> singleton1,
+                     Singleton<T2> singleton2,
+                     Singleton<T3> singleton3)
+        {
+            Param1 = singleton1.Param;
+            Param2 = singleton2.Param;
+            Param3 = singleton3.Param;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="other">
+        /// An instance of <see cref="Triad{T1, T2, T3}"/> from which current one will be constructed
+        /// </param>
+        public Triad(Triad<T1, T2, T3> other)
+        {
+            Param1 = other.Param1;
+            Param2 = other.Param2;
+            Param3 = other.Param3;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="tuple">
+        /// An instance of <see cref="Tuple{T1, T2, T3}"/> which contains correspondive number of values for current instance
+        /// </param>
+        public Triad(Tuple<T1, T2, T3> tuple)
+        {
+            Param1 = tuple.Item1;
+            Param2 = tuple.Item2;
+            Param3 = tuple.Item3;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="pair">
+        /// An instance of <see cref="Pair{T1, T2}"/> which contains two values for current instance
+        /// </param>
+        /// <param name="param">
+        /// A generic type <typeparamref name="T3"/> value representing one of parameters in the data type
+        /// </param>
+        public Triad(Pair<T1, T2> pair, T3 param)
+        {
+            Param1 = pair.Param1;
+            Param2 = pair.Param2;
+            Param3 = param;
+        }
+
+        /// <summary>
         /// Method which converts and swaps first and last values inside the current instance
         /// </summary>
         public void Swap()
         {
-            var convert_param1 = (K?)Convert.ChangeType(Param3, typeof(K));
-            var convert_param3 = (U?)Convert.ChangeType(Param1, typeof(U));
+            var convert_param1 = (T1?)Convert.ChangeType(Param3, typeof(T1));
+            var convert_param3 = (T3?)Convert.ChangeType(Param1, typeof(T3));
 
             (Param1, Param3) = (convert_param1, convert_param3);
         }
@@ -222,9 +454,9 @@
         /// </summary>
         public void Move()
         {
-            var convert_param1 = (K?)Convert.ChangeType(Param2, typeof(K));
-            var convert_param2 = (V?)Convert.ChangeType(Param3, typeof(V));
-            var convert_param3 = (U?)Convert.ChangeType(Param1, typeof(U));
+            var convert_param1 = (T1?)Convert.ChangeType(Param2, typeof(T1));
+            var convert_param2 = (T2?)Convert.ChangeType(Param3, typeof(T2));
+            var convert_param3 = (T3?)Convert.ChangeType(Param1, typeof(T3));
 
             (Param1, Param2, Param3) = (convert_param1, convert_param2, convert_param3);
         }

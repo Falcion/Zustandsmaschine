@@ -9,7 +9,9 @@ namespace Zustand.Data.Arrays
     /// A non-generic dynamic representation of <see cref="Jenga{T}"/> which holds <see cref="Object"/> as it's primary type
     /// </summary>
     public class Jenga : Jenga<object> 
-    { }
+    { 
+        /* Not-implemented code. */
+    }
 
     /// <summary>
     /// A class which represents an unique array data structure reminiscent of the structure of the same name
@@ -429,6 +431,11 @@ namespace Zustand.Data.Arrays
             }
         } 
     }
+
+    /*
+     * Creating non-generic dynamic representation for <see cref="Jenga{TKey, TValue} is not presented in theory, and
+     * the only way of using something close to it, is just constructing instance with both key and value as objects.
+     */
 
     /// <summary>
     /// A class which represents an unique array data structure reminiscent of the structure of the same name

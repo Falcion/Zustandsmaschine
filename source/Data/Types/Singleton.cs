@@ -32,6 +32,28 @@
         }
 
         /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="other">
+        /// An instance of <see cref="Singleton{T}"/> from which current one will be constructed
+        /// </param>
+        public Singleton(Singleton<T> other)
+        {
+            Param = other.Param;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="tuple">
+        /// An instance of <see cref="Tuple{T1}"/> which contains correspondive number of values for current instance
+        /// </param>
+        public Singleton(Tuple<T> tuple)
+        {
+            Param = tuple.Item1;
+        }
+
+        /// <summary>
         /// Method which swaps two indefinetely paired within values inside the data type
         /// </summary>
         /// <exception cref="NotSupportedException">

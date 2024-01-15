@@ -3,6 +3,14 @@
     using Zustand.Data.Types.Interfaces;
 
     /// <summary>
+    /// A non-generic dynamic representation of <see cref="Pair{T}"/> which holds <see cref="Object"/> as it's primary type
+    /// </summary>
+    public class Pair : Pair<object>
+    {
+        /* Not-implemented code. */
+    }
+
+    /// <summary>
     /// A class which represents a non-static container for pair of values
     /// </summary>
     /// <typeparam name="T">
@@ -15,7 +23,7 @@
         /// </summary>
         public T? Param1 { get; set; } = default;
         /// <summary>
-        /// A generic type <see href="T"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </summary>
         public T? Param2 { get; set; } = default;
 
@@ -28,15 +36,56 @@
         /// Instance constructor for the class
         /// </summary>
         /// <param name="param1">
-        /// A generic type <see href="T"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </param>
         /// <param name="param2">
-        /// A generic type <see href="T"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </param>
-        public Pair(T? param1, T? param2)
+        public Pair(T? param1, 
+                    T? param2)
         {
             Param1 = param1;
             Param2 = param2;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="singleton1">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T"/> value representing one of parameters in the data type
+        /// </param>
+        /// <param name="singleton2">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T"/> value representing one of parameters in the data type
+        /// </param>
+        public Pair(Singleton<T> singleton1,
+                    Singleton<T> singleton2)
+        {
+            Param1 = singleton1.Param;
+            Param2 = singleton2.Param;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="other">
+        /// An instance of <see cref="Pair{T}"/> from which current one will be constructed
+        /// </param>
+        public Pair(Pair<T> other)
+        {
+            Param1 = other.Param1;
+            Param2 = other.Param2;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="tuple">
+        /// An instance of <see cref="Tuple{T1, T2}"/> which contains correspondive number of values for current instance
+        /// </param>
+        public Pair(Tuple<T, T> tuple)
+        {
+            Param1 = tuple.Item1;
+            Param2 = tuple.Item2;
         }
 
         /// <summary>
@@ -68,22 +117,22 @@
     /// <summary>
     /// A class which represents a non-static container for pair of values
     /// </summary>
-    /// <typeparam name="K">
+    /// <typeparam name="T1">
     /// A generic type which defines type of one of the values which container will storage
     /// </typeparam>
-    /// <typeparam name="V">
+    /// <typeparam name="T2">
     /// A generic type which defines type of one of the values which container will storage
     /// </typeparam>
-    public class Pair<K, V> : IData
+    public class Pair<T1, T2> : IData
     {
         /// <summary>
-        /// A generic type <see href="K"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
         /// </summary>
-        public K? Param1 { get; set; } = default;
+        public T1? Param1 { get; set; } = default;
         /// <summary>
-        /// A generic type <see href="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T2"/> value representing one of parameters in the data type
         /// </summary>
-        public V? Param2 { get; set; } = default;
+        public T2? Param2 { get; set; } = default;
 
         /// <summary>
         /// Instance constructor for the class
@@ -94,15 +143,56 @@
         /// Instance constructor for the class
         /// </summary>
         /// <param name="param1">
-        /// A generic type <see href="K"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
         /// </param>
         /// <param name="param2">
-        /// A generic type <see href="V"/> value representing one of parameters in the data type
+        /// A generic type <typeparamref name="T2"/> value representing one of parameters in the data type
         /// </param>
-        public Pair(K? param1, V? param2)
+        public Pair(T1? param1, 
+                    T2? param2)
         {
             Param1 = param1;
             Param2 = param2;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="singleton1">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T1"/> value representing one of parameters in the data type
+        /// </param>
+        /// <param name="singleton2">
+        /// An instance of <see cref="Singleton{T}"/> which contains generic type <typeparamref name="T2"/> value representing one of parameters in the data type
+        /// </param>
+        public Pair(Singleton<T1> singleton1,
+                    Singleton<T2> singleton2)
+        {
+            Param1 = singleton1.Param;
+            Param2 = singleton2.Param;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="other">
+        /// An instance of <see cref="Pair{T1, T2}"/> from which current one will be constructed
+        /// </param>
+        public Pair(Pair<T1, T2> other)
+        {
+            Param1 = other.Param1;
+            Param2 = other.Param2;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="tuple">
+        /// An instance of <see cref="Tuple{T1, T2}"/> which contains correspondive number of values for current instance
+        /// </param>
+        public Pair(Tuple<T1, T2> tuple)
+        {
+            Param1 = tuple.Item1;
+            Param2 = tuple.Item2;
         }
 
         /// <summary>
@@ -110,8 +200,8 @@
         /// </summary>
         public void Swap()
         {
-            var convert_param1 = (V?)Convert.ChangeType(Param1, typeof(V));
-            var convert_param2 = (K?)Convert.ChangeType(Param2, typeof(K));
+            var convert_param1 = (T2?)Convert.ChangeType(Param1, typeof(T2));
+            var convert_param2 = (T1?)Convert.ChangeType(Param2, typeof(T1));
 
             Param1 = convert_param2;
             Param2 = convert_param1;
