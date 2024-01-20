@@ -8,7 +8,7 @@ namespace Zustand.Data.Arrays
     /// <summary>
     /// A non-generic dynamic representation of <see cref="Jenga{T}"/> which holds <see cref="Object"/> as it's primary type
     /// </summary>
-    public class Jenga : Jenga<object> 
+    public sealed class Jenga : Jenga<object> 
     { 
         /* Not-implemented code. */
     }

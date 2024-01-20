@@ -345,7 +345,7 @@
         /// An internal method which nullifies the transdefinition of current instance
         /// </summary>
         internal void Redetermine()
-          => Transdefinition = null;
+            => Transdefinition = null;
 
         /// <summary>
         /// An internal method which redefines the transdefinition of current instance within custom signed 32-bit integer matrix
@@ -373,6 +373,7 @@
         /// </param>
         public void Redirect(State? state)
                         => _state = state;
+
         /// <summary>
         /// Method which updates instance of current <see cref="Stateflow"/>
         /// </summary>
@@ -387,6 +388,7 @@
             _state = state;
             _inner = inner;
         }
+
         /// <summary>
         /// Method which updates instance of current <see cref="Stateflow"/>
         /// </summary>
@@ -395,6 +397,7 @@
         /// </param>
         public void Redirect(Shift? shift)
                         => _shift = shift;
+
         /// <summary>
         /// Method which updates instance of current <see cref="Stateflow"/>
         /// </summary>
@@ -409,6 +412,7 @@
             _shift = shift;
             _inner = inner;
         }
+
         /// <summary>
         /// Method which updates instance of current <see cref="Stateflow"/>
         /// </summary>
@@ -417,6 +421,7 @@
         /// </param>
         public void Redirect(Stateflow? inner)
                             => _inner = inner;
+
         /// <summary>
         /// Method which updates instance of current <see cref="Stateflow"/>
         /// </summary>
@@ -435,6 +440,7 @@
             _state = state;
             _shift = shift;
         }
+
         /// <summary>
         /// Method which updates instance of current <see cref="Stateflow"/>
         /// </summary>
@@ -455,7 +461,12 @@
         /// Method which nullifies the transdefinition of current instance and reasserts the boolean parameter of it
         /// </summary>
         public void Translate()
-                { Redetermine(); Define(false); }
+        { 
+            Redetermine(); 
+            
+            Define(false); 
+        }
+
         /// <summary>
         /// Method which redefines the transdefinition of current instance within custom signed 32-bit integer matrix and reasserts the boolean parameter of it
         /// </summary>
@@ -465,7 +476,12 @@
 #pragma warning disable S2368
         public void Translate(int[,] matrix)
 #pragma warning restore S2368
-                       { Redetermine(matrix); Define(true); }
+        { 
+            Redetermine(matrix); 
+            
+            Define(true); 
+        }
+
         /// <summary>
         /// Method which redefines the transdefinition of current instance within another instance of transdefinition and reasserts the boolean parameter of it
         /// </summary>
@@ -473,7 +489,7 @@
         /// An instance of <see cref="Subflow.Transdefs"/> with which current one would be replaced
         /// </param>
         public void Translate(Transdefs transdefinition)
-                          { Redetermine(transdefinition); }
+        => Redetermine(transdefinition); 
 
         /// <summary>
         /// Method which nullifies every parameter of current instance or defines it to the default value
@@ -552,7 +568,9 @@
         /// A generic type <typeparamref name="T"/> value representing designation of the instance of the stateflow
         /// </param>
         public Stateflow(T designation) : base()
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -564,7 +582,9 @@
         /// An instance of <see cref="Subflow.State"/> which represents the shift of the current instance 
         /// </param>
         public Stateflow(T designation, State state) : base(state)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -580,7 +600,9 @@
         /// </param>
         public Stateflow(T designation, State state, Transdefs transdefinition) : base(state, 
                                                                                        transdefinition)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -599,7 +621,9 @@
         /// </param>
         public Stateflow(T designation, State state, Stateflow inner, bool is_defined = false) : base(state, 
                                                                                                       inner, is_defined)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -619,7 +643,9 @@
         public Stateflow(T designation, State state, Stateflow inner, Transdefs transdefinition) : base(state, 
                                                                                                         inner, 
                                                                                                         transdefinition)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -631,7 +657,9 @@
         /// An instance of <see cref="Subflow.Shift"/> which represents the shift of the current instance 
         /// </param>
         public Stateflow(T designation, Shift shift) : base(shift)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -645,7 +673,9 @@
         /// </param>
         public Stateflow(T designation, Shift shift, Transdefs transdefinition) : base(shift, 
                                                                                        transdefinition)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -664,8 +694,10 @@
         /// </param>
         public Stateflow(T designation, Shift shift, Stateflow inner, bool is_defined = false) : base(shift, 
                                                                                                       inner, is_defined)
-           { Designation = designation; }
-
+        { 
+            Designation = designation; 
+        }
+        
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
@@ -684,7 +716,9 @@
         public Stateflow(T designation, Shift shift, Stateflow inner, Transdefs transdefinition) : base(shift, 
                                                                                                         inner, 
                                                                                                         transdefinition)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -699,7 +733,9 @@
         /// Boolean parameter which defines does stateflow is using transdefinitions in it's behaviour
         /// </param>
         public Stateflow(T designation, Stateflow inner, bool is_defined = false) : base(inner, is_defined)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -715,7 +751,9 @@
         /// </param>
         public Stateflow(T designation, Stateflow inner, Transdefs transdefinition) : base(inner,
                                                                                            transdefinition)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -738,7 +776,9 @@
         public Stateflow(T designation, Stateflow inner, State state, Shift shift, bool is_defined = false) : base(inner, 
                                                                                                                    state, 
                                                                                                                    shift, is_defined)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -762,7 +802,9 @@
                                                                                                                      state, 
                                                                                                                      shift, 
                                                                                                                      transdefinition)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -777,7 +819,9 @@
         /// Boolean parameter which defines would be instance created with empty instances of state and shift or not
         /// </param>
         public Stateflow(T designation, Transdefs transdefinition, bool recompile = false) : base(transdefinition, recompile)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -794,7 +838,9 @@
         public Stateflow(T designation, State state,
                                         Shift shift) : base(state,
                                                             shift)
-           { Designation = designation; }
+        { 
+            Designation = designation; 
+        }
 
         /// <summary>
         /// Method which redefines the value of the designation of the instance of the <see cref="Stateflow{T}"/> 

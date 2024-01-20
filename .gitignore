@@ -702,3 +702,6 @@ out/
 # Git repository infrastructure
 package-lock.json
 manifest-backup.json
+
+# Project source
+!source/**/Logs

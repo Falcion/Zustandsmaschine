@@ -1,4 +1,7 @@
-﻿namespace Zustand.Subflow
+﻿using Zustand.Data.Types;
+using Zustand.Data.Types.Interfaces;
+
+namespace Zustand.Subflow
 {
     /// <summary>
     /// A class which represents the transdefinitions between instances of the <see cref="Flow.Stateflow"/>
@@ -28,18 +31,19 @@
         /// <summary>
         /// An instance <see cref="Tuple{T1, T2}"/> which represents the pair of definitions
         /// </summary>
-        private (string, string) _transdef = (string.Empty,
-                                              string.Empty);
+        private Pair<string> _transdef = new Pair<string>(string.Empty, 
+                                                          string.Empty);
         /// <summary>
         /// An instance <see cref="Tuple{T1, T2}"/> which represents the pair of coordinates
         /// </summary>
-        private (uint, uint) _coords = (default,
-                                        default);
+        private Pair<UInt32> _coords = new Pair<UInt32>(default(uint),
+                                                        default(uint));
 
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         public Transdefs() { }
+
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
@@ -47,19 +51,35 @@
         /// An array of signed 32-bit integer values which represents the matrix of transdefinition
         /// </param>
         public Transdefs(int[,] matrix)
-                { MATRIX_COEF = matrix; }
+        { 
+            MATRIX_COEF = matrix;
+        }
+
+        /// <summary>
+        /// Instance constructor for the class
+        /// </summary>
+        /// <param name="transdefinitions">
+        /// An instance <see cref="Pair{T}"/> which represents the pair of definitions
+        /// </param>
+        public Transdefs(Pair<string> transdefinitions)
+        {
+            _transdef.Param1 = transdefinitions.Param1;
+            _transdef.Param2 = transdefinitions.Param2;
+        }
+
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
         /// <param name="transdefinitions">
         /// An instance <see cref="Tuple{T1, T2}"/> which represents the pair of definitions
         /// </param>
-        public Transdefs((string,
+        public Transdefs((string, 
                           string) transdefinitions)
         {
-            _transdef.Item1 = transdefinitions.Item1;
-            _transdef.Item2 = transdefinitions.Item2;
+            _transdef.Param1 = transdefinitions.Item1;
+            _transdef.Param2 = transdefinitions.Item2;
         }
+
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
@@ -69,9 +89,10 @@
         public Transdefs((uint,
                           uint) coords)
         {
-            _coords.Item1 = coords.Item1;
-            _coords.Item2 = coords.Item2;
+            _coords.Param1 = coords.Item1;
+            _coords.Param2 = coords.Item2;
         }
+
         /// <summary>
         /// Instance constructor for the class
         /// </summary>

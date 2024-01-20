@@ -23,7 +23,9 @@
         /// </param>
         public StateflowInitializationException(Stateflow data) : 
                                               base(Format(data))
-        { _data = data; }
+        { 
+            _data = data; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -36,7 +38,9 @@
         /// </param>
         public StateflowInitializationException(Stateflow data, string message) 
                                                                 : base(message)
-        { _data = data; }
+        { 
+            _data = data; 
+        }
 
         /// <summary>
         /// Instance constructor for the class
@@ -54,8 +58,10 @@
                                                              Exception inner) : 
                                                                   base(message, 
                                                                        inner)
-        { _data = data; }
-
+        { 
+            _data = data; 
+        }
+        
         /// <summary>
         /// An instance of <see cref="Stateflow"/> which caused an exception
         /// </summary>

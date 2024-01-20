@@ -247,7 +247,7 @@
         /// A signed 32-bit integer value which represents coefficient with which combination of weights would be found
         /// </param>
         public void Transform(uint delta_weight, int coef)
-                => this._weight += (uint)(delta_weight + delta_weight % coef);
+         => this._weight += (uint)(delta_weight + delta_weight % coef);
 
         /// <summary>
         /// Method which changes current value of stable parameter for current instance
@@ -316,7 +316,7 @@
         /// Method which sets stable parameter by default as unstable
         /// </summary>
         public void Irrationalize()
-            => this._stable = false;
+        => this._stable = false;
 
         /// <summary>
         /// Method which reassembles non-essential data of instance within specified behavior
@@ -345,7 +345,7 @@
         /// A signed 64-bit integer value which represents the private key for current state
         /// </param>
         public void Reidentify(long key)
-                            => this.key = key;
+                      => this.key = key;
 
         /// <summary>
         /// Method which changes the identity of current instance through combination of key and coefficient
@@ -357,7 +357,7 @@
         /// A signed 32-bit integer value which represents coefficient with which combination of weights would be found
         /// </param>
         public void Reidentify(long key, int coef)
-                            => this.key = (key ^ coef);
+                     => this.key = (key^(int)coef);
 
         /// <summary>
         /// A string value which represents the designation value of the current state
@@ -383,9 +383,8 @@
         /// <returns>
         /// A string value which represents the designation value of the current state
         /// </returns>
-        public override string ToString()
-        { return _designation; }
-
+        public override string ToString() => _designation;
+        
         /// <summary>
         /// An instance of <see cref="ISubflow"/> which represents this subflow's instance data
         /// </summary>
