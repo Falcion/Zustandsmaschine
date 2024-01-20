@@ -110,5 +110,42 @@ namespace Zustand.Attributes
         /// An inner instance of interface for subflow attribute as common instance
         /// </summary>
         public ISubflowAttribute? Attr { get; private set; }
+
+        public static class Extensions
+        {
+            private static Type TYPEOF = typeof(StateAttribute);
+
+            public static StateAttribute GetAttribute(Type type)
+            {
+                StateAttribute? attribute = (StateAttribute?) Attribute.GetCustomAttribute(type, TYPEOF);
+
+                if (attribute == null)
+                    throw new ArgumentNullException(nameof(attribute), "Can't parse required attribute from given instance of value.");
+
+                return attribute;
+            }
+
+            public static StateAttribute GetAttribute<T>(T data)
+            {
+                if (data == null)
+                    throw new ArgumentNullException(nameof(data), "Can't parse required attribute from null instance.");
+                
+                var type = data.GetType();
+
+                return GetAttribute(type);
+            }
+
+            public static byte[]? GetData(Type type) => GetAttribute(type).Data;
+
+            public static byte[]? GetData<T>(T data) => GetAttribute(data).Data;
+
+            public static object? GetMarker(Type type) => GetAttribute(type).Marker;
+
+            public static object? GetMarker<T>(T data) => GetAttribute(data).Marker;
+
+            public static int? GetSign(Type type) => GetAttribute(type).Sign;
+
+            public static int? GetSign<T>(T data) => GetAttribute(data).Sign;
+        }
     }
 }

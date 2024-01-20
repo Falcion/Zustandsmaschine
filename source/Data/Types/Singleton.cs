@@ -84,5 +84,45 @@
         {
             Param = default;
         }
+
+        public static bool operator ==(Singleton<T> singleton1, Singleton<T> singleton2)
+        {
+            if(ReferenceEquals(singleton1,
+                               singleton2))
+                return true;
+
+            if(singleton1 is null ||
+               singleton2 is null)
+                return false;
+
+            return EqualityComparer<T>.Default.Equals(singleton1.Param,
+                                                      singleton2.Param);
+        }
+
+        public static bool operator !=(Singleton<T> singleton1, Singleton<T> singleton2)
+        {
+            if(ReferenceEquals(singleton1,
+                               singleton2))
+                return false;
+
+            if(singleton1 is null ||
+               singleton2 is null)
+                return true;
+
+            return EqualityComparer<T>.Default.Equals(singleton1.Param,
+                                                      singleton2.Param);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if(obj is Singleton<T> another) 
+            {
+                return this == another;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode() => Param?.GetHashCode() ?? 0;
     }
 }

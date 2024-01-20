@@ -21,6 +21,7 @@ namespace Zustand.Subflow
              * [1,4] -> [2,5]: defining block for self-existence
              * Remaining blocks of "Г" forms are external blocks
              */
+            
             { 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0 },
