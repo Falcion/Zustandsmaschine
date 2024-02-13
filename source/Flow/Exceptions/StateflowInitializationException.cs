@@ -13,7 +13,7 @@
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
-        public StateflowInitializationException() { }
+        public StateflowInitializationException() : base() { }
 
         /// <summary>
         /// Instance constructor for the class
@@ -21,8 +21,7 @@
         /// <param name="data">
         /// An instance of <see cref="Stateflow"/> which caused an exception
         /// </param>
-        public StateflowInitializationException(Stateflow data) : 
-                                              base(Format(data))
+        public StateflowInitializationException(Stateflow data) : base()
         { 
             _data = data; 
         }
@@ -36,8 +35,7 @@
         /// <param name="message">
         /// A string value which represents a message for an instance of <see cref="Exception"/>
         /// </param>
-        public StateflowInitializationException(Stateflow data, string message) 
-                                                                : base(message)
+        public StateflowInitializationException(Stateflow data, string message) : base(message)
         { 
             _data = data; 
         }
@@ -54,10 +52,7 @@
         /// <param name="inner">
         /// An instance of <see cref="Exception"/> which represents inner exception for this one
         /// </param>
-        public StateflowInitializationException(Stateflow data, string message, 
-                                                             Exception inner) : 
-                                                                  base(message, 
-                                                                       inner)
+        public StateflowInitializationException(Stateflow data, string message, Exception inner) : base(message, inner)
         { 
             _data = data; 
         }
@@ -76,7 +71,7 @@
         /// <returns>
         /// A string value which represents a message for an instance of <see cref="Exception"/>
         /// </returns>
-        private static string Format(object data)
+        private static string Stringify(object data)
         {
             return string.Format(string.Format("Exception was caused by null stateflow: {0}", data));
         }

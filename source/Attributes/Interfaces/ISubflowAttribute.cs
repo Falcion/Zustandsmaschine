@@ -11,8 +11,13 @@
         public byte[]? Data { get; }
 
         /// <summary>
-        /// An <see cref="Object"/> type object which represents the object marker for current instance of attribute
+        /// A signed 32-bit integer value representing the logical sign of an attribute
         /// </summary>
-        public object[]? Marker { get; set; }
+        public int Sign { get; }
+
+        public string Name { get; }
+
+        public uint Weight { get; }
+        public bool Stable { get; }
     }
 }

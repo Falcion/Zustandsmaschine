@@ -3,6 +3,7 @@
     using Zustand.Flow.Exceptions;
 
     using Zustand.Subflow;
+    using Zustand.Subflow.Interfaces;
 
     /// <summary>
     /// A class which represents an instance for stateflow
@@ -489,7 +490,7 @@
         /// An instance of <see cref="Subflow.Transdefs"/> with which current one would be replaced
         /// </param>
         public void Translate(Transdefs transdefinition)
-        => Redetermine(transdefinition); 
+                         => Redetermine(transdefinition); 
 
         /// <summary>
         /// Method which nullifies every parameter of current instance or defines it to the default value
@@ -524,26 +525,26 @@
                      => _key = marker;
 
         /// <summary>
-        /// An instance of <see cref="Subflow.State"/> which represents the shift of the current instance 
+        /// <inheritdoc cref="_state"/>
         /// </summary>
         public State? State => _state;
         /// <summary>
-        /// An instance of <see cref="Subflow.Shift"/> which represents the shift of the current instance 
+        /// <inheritdoc cref="_shift"/>
         /// </summary>
         public Shift? Shift => _shift;
 
         /// <summary>
-        /// An instance of <see cref="Stateflow"/> which represents inner stateflow
+        /// <inheritdoc cref="_inner"/>
         /// </summary>
         public Stateflow? Inner => _inner;
 
         /// <summary>
-        /// Boolean parameter which defines does stateflow is using transdefinitions in it's behaviour
+        /// <inheritdoc cref="is_defined"/>
         /// </summary>
         public bool IsDefined => is_defined;
 
         /// <summary>
-        /// A signed 64-bit integer value representing an identification key for current instance
+        /// <inheritdoc cref="_key"/>
         /// </summary>
         public long? Key => _key;
     }

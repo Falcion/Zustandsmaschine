@@ -16,7 +16,10 @@
     /// <typeparam name="T">
     /// A generic type which defines type of values which container will storage
     /// </typeparam>
-    public class Quadra<T> : IData
+#pragma warning disable S4035
+    public class Quadra<T> : IData, IEquatable<Quadra<T>>,
+#pragma warning restore S4035
+                             IEqualityComparer<Quadra<T>>
     {
         /// <summary>
         /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
@@ -224,6 +227,95 @@
         /// An instance of <see cref="Pair{T}"/> which contains other two parameters of the instance, correspondive <see cref="Param3"/> and <see cref="Param4"/>
         /// </summary>
         public Pair<T> Pair2 => _pair2;
+
+        public static implicit operator Quadra<T>(
+                                         Tuple<T, T, T, T> value)
+        {
+            return new Quadra<T>(value);
+        }
+
+        public static implicit operator Quadra<T>(
+                                              (T, T, T, T) value)
+        {
+            return new Quadra<T>(value);
+        }
+
+        public static bool operator ==(Quadra<T>? quadra1,
+                                       Quadra<T>? quadra2)
+        {
+            if (ReferenceEquals(quadra1,
+                                quadra2))
+                return true;
+
+            if (quadra1 is null && quadra2 is null)
+                return true;
+            if (quadra1 is null || quadra2 is null)
+                return false;
+
+            return EqualityComparer<T>.Default.Equals(quadra1.Param1, quadra2.Param1) &&
+                   EqualityComparer<T>.Default.Equals(quadra1.Param2, quadra2.Param2) &&
+                   EqualityComparer<T>.Default.Equals(quadra1.Param3, quadra2.Param3) &&
+                   EqualityComparer<T>.Default.Equals(quadra1.Param4, quadra2.Param4);
+        }
+
+        public static bool operator !=(Quadra<T>? quadra1,
+                                       Quadra<T>? quadra2)
+        {
+            return !(quadra1 == quadra2);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Quadra<T> another)
+            {
+                return this == another;
+            }
+
+            return false;
+        }
+
+        public bool Equals(Quadra<T>? other)
+        {
+            if(other is null)
+                return false;
+
+            return this == other;
+        }
+
+        public bool Equals(Quadra<T>? quadra1,
+                           Quadra<T>? quadra2)
+        {
+            if (quadra1 == null && quadra2 == null) return true;
+            if (quadra1 == null || quadra2 == null) return false;
+
+            return quadra1 == quadra2;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param4?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
+
+        public int GetHashCode(Quadra<T>? other)
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param4?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
     }
 
     /// <summary>
@@ -235,7 +327,10 @@
     /// <typeparam name="T2">
     /// A generic type which defines type of pair of values which container will storage
     /// </typeparam>
-    public class Quadra<T1, T2> : IData
+#pragma warning disable S4035
+    public class Quadra<T1, T2> : IData, IEquatable<Quadra<T1, T2>>,
+#pragma warning restore S4035
+                                  IEqualityComparer<Quadra<T1, T2>>
     {
         /// <summary>
         /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
@@ -493,6 +588,107 @@
         /// An instance of <see cref="Pair{T}"/> which contains other two parameters of the instance, correspondive <see cref="Param3"/> and <see cref="Param4"/>
         /// </summary>
         public Pair<T2> Pair2 => _pair2;
+
+        public static implicit operator Quadra<T1, T2>(
+                                         Tuple<T1, T1, T2, T2> value)
+        {
+            return new Quadra<T1, T2>(value);
+        }
+
+        public static implicit operator Quadra<T1, T2>(
+                                              (T1, T1, T2, T2) value)
+        {
+            return new Quadra<T1, T2>(value);
+        } 
+
+        public static implicit operator Quadra<T1, T2>(
+                                         Tuple<T1, T2, T1, T2> value)
+        {
+            return new Quadra<T1, T2>(value);
+        }
+
+        public static implicit operator Quadra<T1, T2>(
+                                              (T1, T2, T1, T2) value)
+        {
+            return new Quadra<T1, T2>(value);
+        }
+
+        public static bool operator ==(Quadra<T1, T2>? quadra1,
+                                       Quadra<T1, T2>? quadra2)
+        {
+            if (ReferenceEquals(quadra1,
+                                quadra2))
+                return true;
+
+            if (quadra1 is null && quadra2 is null)
+                return true;
+            if (quadra1 is null || quadra2 is null)
+                return false;
+
+            return EqualityComparer<T1>.Default.Equals(quadra1.Param1, quadra2.Param1) &&
+                   EqualityComparer<T1>.Default.Equals(quadra1.Param2, quadra2.Param2) &&
+                   EqualityComparer<T2>.Default.Equals(quadra1.Param3, quadra2.Param3) &&
+                   EqualityComparer<T2>.Default.Equals(quadra1.Param4, quadra2.Param4);
+        }
+
+        public static bool operator !=(Quadra<T1, T2>? quadra1,
+                                       Quadra<T1, T2>? quadra2)
+        {
+            return !(quadra1 == quadra2);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Quadra<T1, T2> another)
+            {
+                return this == another;
+            }
+
+            return false;
+        }
+
+        public bool Equals(Quadra<T1, T2>? other)
+        {
+            if(other is null)
+                return false;
+
+            return this == other;
+        }
+
+        public bool Equals(Quadra<T1, T2>? quadra1,
+                           Quadra<T1, T2>? quadra2)
+        {
+            if (quadra1 == null && quadra2 == null) return true;
+            if (quadra1 == null || quadra2 == null) return false;
+
+            return quadra1 == quadra2;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param4?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
+
+        public int GetHashCode(Quadra<T1, T2>? other)
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param4?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
     }
 
     /// <summary>
@@ -507,7 +703,10 @@
     /// <typeparam name="T3">
     /// A generic type which defines type of pair of values which container will storage
     /// </typeparam>
-    public class Quadra<T1, T2, T3> : IData
+#pragma warning disable S4035
+    public class Quadra<T1, T2, T3> : IData, IEquatable<Quadra<T1, T2, T3>>,
+#pragma warning restore S4035
+                                      IEqualityComparer<Quadra<T1, T2, T3>>
     {
         /// <summary>
         /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
@@ -786,6 +985,119 @@
         /// An instance of <see cref="Pair{T}"/> which contains other two parameters of the instance, correspondive <see cref="Param3"/> and <see cref="Param4"/>
         /// </summary>
         public Pair<T3> Pair2 => _pair2;
+
+        public static implicit operator Quadra<T1, T2, T3>(
+                                         Tuple<T1, T2, T3, T3> value)
+        {
+            return new Quadra<T1, T2, T3>(value);
+        }
+
+        public static implicit operator Quadra<T1, T2, T3>(
+                                              (T1, T2, T3, T3) value)
+        {
+            return new Quadra<T1, T2, T3>(value);
+        }
+
+        public static implicit operator Quadra<T1, T2, T3>(
+                                         Tuple<T1, T3, T3, T2> value)
+        {
+            return new Quadra<T1, T2, T3>(value);
+        }
+
+        public static implicit operator Quadra<T1, T2, T3>(
+                                              (T1, T3, T3, T2) value)
+        {
+            return new Quadra<T1, T2, T3>(value);
+        } 
+
+        public static implicit operator Quadra<T1, T2, T3>(
+                                         Tuple<T3, T3, T1, T2> value)
+        {
+            return new Quadra<T1, T2, T3>(value);
+        }
+
+        public static implicit operator Quadra<T1, T2, T3>(
+                                              (T3, T3, T1, T2) value)
+        {
+            return new Quadra<T1, T2, T3>(value);
+        }
+
+        public static bool operator ==(Quadra<T1, T2, T3>? quadra1,
+                                       Quadra<T1, T2, T3>? quadra2)
+        {
+            if (ReferenceEquals(quadra1,
+                                quadra2))
+                return true;
+
+            if (quadra1 is null && quadra2 is null)
+                return true;
+            if (quadra1 is null || quadra2 is null)
+                return false;
+
+            return EqualityComparer<T1>.Default.Equals(quadra1.Param1, quadra2.Param1) &&
+                   EqualityComparer<T2>.Default.Equals(quadra1.Param2, quadra2.Param2) &&
+                   EqualityComparer<T3>.Default.Equals(quadra1.Param3, quadra2.Param3) &&
+                   EqualityComparer<T3>.Default.Equals(quadra1.Param4, quadra2.Param4);
+        }
+
+        public static bool operator !=(Quadra<T1, T2, T3>? quadra1,
+                                       Quadra<T1, T2, T3>? quadra2)
+        {
+            return !(quadra1 == quadra2);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Quadra<T1, T2, T3> another)
+            {
+                return this == another;
+            }
+
+            return false;
+        }
+
+        public bool Equals(Quadra<T1, T2, T3>? other)
+        {
+            if(other is null)
+                return false;
+
+            return this == other;
+        }
+
+        public bool Equals(Quadra<T1, T2, T3>? quadra1,
+                           Quadra<T1, T2, T3>? quadra2)
+        {
+            if (quadra1 == null && quadra2 == null) return true;
+            if (quadra1 == null || quadra2 == null) return false;
+
+            return quadra1 == quadra2;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param4?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
+
+        public int GetHashCode(Quadra<T1, T2, T3>? other)
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param4?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
     }
 
     /// <summary>
@@ -803,7 +1115,10 @@
     /// <typeparam name="T4">
     /// A generic type which defines type of pair of values which container will storage
     /// </typeparam>
-    public class Quadra<T1, T2, T3, T4> : IData
+#pragma warning disable S4035
+    public class Quadra<T1, T2, T3, T4> : IData, IEquatable<Quadra<T1, T2, T3, T4>>,
+#pragma warning restore S4035
+                                          IEqualityComparer<Quadra<T1, T2, T3, T4>>
     {
         /// <summary>
         /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
@@ -1070,5 +1385,94 @@
         /// An instance of <see cref="Pair{T}"/> which contains other two parameters of the instance, correspondive <see cref="Param3"/> and <see cref="Param4"/>
         /// </summary>
         public Pair<T3, T4> Pair2 => _pair2;
+
+        public static implicit operator Quadra<T1, T2, T3, T4>(
+                                         Tuple<T1, T2, T3, T4> value)
+        {
+            return new Quadra<T1, T2, T3, T4>(value);
+        }
+
+        public static implicit operator Quadra<T1, T2, T3, T4>(
+                                              (T1, T2, T3, T4) value)
+        {
+            return new Quadra<T1, T2, T3, T4>(value);
+        }
+
+        public static bool operator ==(Quadra<T1, T2, T3, T4>? quadra1,
+                                       Quadra<T1, T2, T3, T4>? quadra2)
+        {
+            if (ReferenceEquals(quadra1,
+                                quadra2))
+                return true;
+
+            if (quadra1 is null && quadra2 is null)
+                return true;
+            if (quadra1 is null || quadra2 is null)
+                return false;
+
+            return EqualityComparer<T1>.Default.Equals(quadra1.Param1, quadra2.Param1) &&
+                   EqualityComparer<T2>.Default.Equals(quadra1.Param2, quadra2.Param2) &&
+                   EqualityComparer<T3>.Default.Equals(quadra1.Param3, quadra2.Param3) &&
+                   EqualityComparer<T4>.Default.Equals(quadra1.Param4, quadra2.Param4);
+        }
+
+        public static bool operator !=(Quadra<T1, T2, T3, T4>? quadra1,
+                                       Quadra<T1, T2, T3, T4>? quadra2)
+        {
+            return !(quadra1 == quadra2);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Quadra<T1, T2, T3, T4> another)
+            {
+                return this == another;
+            }
+
+            return false;
+        }
+
+        public bool Equals(Quadra<T1, T2, T3, T4>? other)
+        {
+            if(other is null)
+                return false;
+
+            return this == other;
+        }
+
+        public bool Equals(Quadra<T1, T2, T3, T4>? quadra1,
+                           Quadra<T1, T2, T3, T4>? quadra2)
+        {
+            if (quadra1 == null && quadra2 == null) return true;
+            if (quadra1 == null || quadra2 == null) return false;
+
+            return quadra1 == quadra2;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param4?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
+
+        public int GetHashCode(Quadra<T1, T2, T3, T4>? other)
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (other?.Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (other?.Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (other?.Param3?.GetHashCode() ?? 0);
+                hash = hash * 23 + (other?.Param4?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
     }
 }

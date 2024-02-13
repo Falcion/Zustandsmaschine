@@ -1,6 +1,26 @@
 ﻿namespace Zustand.Data.Arrays.Threadsafe
 {
     /// <summary>
+    /// Thread-safe non-generic dynamic representation of <see cref="Jenga{T}"/> which holds <see cref="Object"/> as it's primary type
+    /// </summary>
+    public class Jenga : Jenga<object>
+    {
+        /// <summary>
+        /// Thread-safe instance constructor for the class
+        /// </summary>
+        /// <param name="instance">
+        /// An instance of <see cref="Arrays.Jenga"/> which represents another instance from which this one would be built
+        /// </param>
+        public Jenga(Arrays.Jenga instance) : base(instance)
+        {
+            lock(SyncRoot)
+            {
+                Controllers = instance.Controllers;
+            }
+        }
+    }
+
+    /// <summary>
     /// Thread-safe representation of <see cref="Arrays.Jenga{T}"/>
     /// </summary>
     /// <typeparam name="T">
@@ -154,7 +174,9 @@
         /// <param name="position">
         /// A signed 64-bit integer value which represents the position-key of input into the current instance of inner part
         /// </param>
+#pragma warning disable S1133
         [Obsolete("Entering default for generic type value cause exceptions in case of custom collection, usage of this method can cause exceptions.")]
+#pragma warning restore S1133
         public override void Enter(Int64 position)
         {
             lock (SyncRoot)
@@ -564,7 +586,9 @@
         /// <param name="key">
         /// A generic type <typeparamref name="TKey"/> value representing key position in the <see cref="Dictionary{TKey, TValue}"/> of instance
         /// </param>
+#pragma warning disable S1133
         [Obsolete("Entering default for generic type value cause exceptions in case of custom dictionary, usage of this method can cause exceptions.")]
+#pragma warning restore S1133
         public override void Enter(TKey key)
         {
             lock (SyncRoot)

@@ -15,7 +15,7 @@
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
-        public AssemblerNullableException() { }
+        public AssemblerNullableException() : base() { }
 
         /// <summary>
         /// Instance constructor for the class
@@ -23,7 +23,7 @@
         /// <param name="value">
         /// A nullable instance of class which represents assembler in which exception was caused
         /// </param>
-        public AssemblerNullableException(Assembler? value)
+        public AssemblerNullableException(Assembler? value) : base()
         {
             _value = value;
         }
@@ -35,8 +35,7 @@
         /// A nullable instance of class which represents assembler in which exception was caused
         /// </param>
         /// <param name="message"></param>
-        public AssemblerNullableException(Assembler? value, string message)
-                                                            : base(message)
+        public AssemblerNullableException(Assembler? value, string message) : base(message)
         {
             _value = value;
         }
@@ -53,16 +52,13 @@
         /// <param name="inner">
         /// An exception instance which represents the inner exception of this one instance
         /// </param>
-        public AssemblerNullableException(Assembler? value, string message, 
-                                                         Exception inner)
-                                                            : base(message, 
-                                                                   inner)
+        public AssemblerNullableException(Assembler? value, string message, Exception inner) : base(message, inner)
         {
             _value = value;
         }
 
         /// <summary>
-        /// A nullable instance of class which represents assembler in which exception was caused
+        /// <inheritdoc cref="_value"/>
         /// </summary>
         public Assembler? Value => _value;
     }

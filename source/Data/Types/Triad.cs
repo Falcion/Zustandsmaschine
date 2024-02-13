@@ -16,7 +16,10 @@
     /// <typeparam name="T">
     /// A generic type which defines type of every value which container will storage
     /// </typeparam>
-    public class Triad<T> : IData
+#pragma warning disable S4035
+    public class Triad<T> : IData, IEquatable<Triad<T>>,
+#pragma warning restore S4035
+                            IEqualityComparer<Triad<T>>
     {
         /// <summary>
         /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
@@ -145,6 +148,92 @@
             Param2 = default;
             Param3 = default;
         }
+
+        public static implicit operator Triad<T>(
+                                        Tuple<T, T, T> value)
+        {
+            return new Triad<T>(value);
+        }
+
+        public static implicit operator Triad<T>(
+                                             (T, T, T) value)
+        {
+            return new Triad<T>(value);
+        }
+
+        public static bool operator ==(Triad<T>? triad1,
+                                       Triad<T>? triad2)
+        {
+            if (ReferenceEquals(triad1,
+                                triad2))
+                return true;
+
+            if (triad1 is null && triad2 is null)
+                return true;
+            if (triad1 is null || triad2 is null)
+                return false;
+
+            return EqualityComparer<T>.Default.Equals(triad1.Param1, triad2.Param1) &&
+                   EqualityComparer<T>.Default.Equals(triad1.Param2, triad2.Param2) &&
+                   EqualityComparer<T>.Default.Equals(triad1.Param3, triad2.Param3);
+        }
+
+        public static bool operator !=(Triad<T>? triad1,
+                                       Triad<T>? triad2)
+        {
+            return !(triad1 == triad2);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Triad<T> another)
+            {
+                return this == another;
+            }
+
+            return false;
+        }
+
+        public bool Equals(Triad<T>? other)
+        {
+            if(other is null)
+                return false;
+
+            return this == other;
+        }
+
+        public bool Equals(Triad<T>? triad1,
+                           Triad<T>? triad2)
+        {
+            if (triad1 == null && triad2 == null) return true;
+            if (triad1 == null || triad2 == null) return false;
+
+            return triad1 == triad2;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
+
+        public int GetHashCode(Triad<T>? other)
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
     }
 
     /// <summary>
@@ -156,7 +245,10 @@
     /// <typeparam name="T2">
     /// A generic type which defines type of both values which container will storage
     /// </typeparam>
-    public class Triad<T1, T2> : IData
+#pragma warning disable S4035
+    public class Triad<T1, T2> : IData, IEquatable<Triad<T1, T2>>,
+#pragma warning restore S4035
+                                 IEqualityComparer<Triad<T1, T2>>
     {
         /// <summary>
         /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
@@ -320,6 +412,104 @@
             Param2 = default;
             Param3 = default;
         }
+
+        public static implicit operator Triad<T1, T2>(
+                                        Tuple<T1, T2, T2> value)
+        {
+            return new Triad<T1, T2>(value);
+        }
+
+        public static implicit operator Triad<T1, T2>(
+                                             (T1, T2, T2) value)
+        {
+            return new Triad<T1, T2>(value);
+        }
+
+        public static implicit operator Triad<T1, T2>(
+                                        Tuple<T2, T1, T2> value)
+        {
+            return new Triad<T1, T2>(value);
+        }
+
+        public static implicit operator Triad<T1, T2>(
+                                             (T2, T1, T2) value)
+        {
+            return new Triad<T1, T2>(value);
+        }
+
+        public static bool operator ==(Triad<T1, T2>? triad1,
+                                       Triad<T1, T2>? triad2)
+        {
+            if (ReferenceEquals(triad1,
+                                triad2))
+                return true;
+
+            if (triad1 is null && triad2 is null)
+                return true;
+            if (triad1 is null || triad2 is null)
+                return false;
+
+            return EqualityComparer<T1>.Default.Equals(triad1.Param1, triad2.Param1) &&
+                   EqualityComparer<T2>.Default.Equals(triad1.Param2, triad2.Param2) &&
+                   EqualityComparer<T2>.Default.Equals(triad1.Param3, triad2.Param3);
+        }
+
+        public static bool operator !=(Triad<T1, T2>? triad1,
+                                       Triad<T1, T2>? triad2)
+        {
+            return !(triad1 == triad2);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Triad<T1, T2> another)
+            {
+                return this == another;
+            }
+
+            return false;
+        }
+
+        public bool Equals(Triad<T1, T2>? other)
+        {
+            if(other is null)
+                return false;
+
+            return this == other;
+        }
+
+        public bool Equals(Triad<T1, T2>? triad1,
+                           Triad<T1, T2>? triad2)
+        {
+            if (triad1 == null && triad2 == null) return true;
+            if (triad1 == null || triad2 == null) return false;
+
+            return triad1 == triad2;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
+
+        public int GetHashCode(Triad<T1, T2>? other)
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
     }
 
     /// <summary>
@@ -334,7 +524,10 @@
     /// <typeparam name="T3">
     /// A generic type which defines type of one value which container will storage
     /// </typeparam>
-    public class Triad<T1, T2, T3> : IData
+#pragma warning disable S4035
+    public class Triad<T1, T2, T3> : IData, IEquatable<Triad<T1, T2, T3>>,
+#pragma warning restore S4035
+                                     IEqualityComparer<Triad<T1, T2, T3>>
     {
         /// <summary>
         /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
@@ -469,6 +662,92 @@
             Param1 = default;
             Param2 = default;
             Param3 = default;
+        }
+
+        public static implicit operator Triad<T1, T2, T3>(
+                                        Tuple<T1, T2, T3> value)
+        {
+            return new Triad<T1, T2, T3>(value);
+        }
+
+        public static implicit operator Triad<T1, T2, T3>(
+                                             (T1, T2, T3) value)
+        {
+            return new Triad<T1, T2, T3>(value);
+        }
+
+        public static bool operator ==(Triad<T1, T2, T3>? triad1,
+                                       Triad<T1, T2, T3>? triad2)
+        {
+            if (ReferenceEquals(triad1,
+                                triad2))
+                return true;
+
+            if (triad1 is null && triad2 is null)
+                return true;
+            if (triad1 is null || triad2 is null)
+                return false;
+
+            return EqualityComparer<T1>.Default.Equals(triad1.Param1, triad2.Param1) &&
+                   EqualityComparer<T2>.Default.Equals(triad1.Param2, triad2.Param2) &&
+                   EqualityComparer<T3>.Default.Equals(triad1.Param3, triad2.Param3);
+        }
+
+        public static bool operator !=(Triad<T1, T2, T3>? triad1,
+                                       Triad<T1, T2, T3>? triad2)
+        {
+            return !(triad1 == triad2);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Triad<T1, T2, T3> another)
+            {
+                return this == another;
+            }
+
+            return false;
+        }
+
+        public bool Equals(Triad<T1, T2, T3>? other)
+        {
+            if(other is null)
+                return false;
+
+            return this == other;
+        }
+
+        public bool Equals(Triad<T1, T2, T3>? triad1,
+                           Triad<T1, T2, T3>? triad2)
+        {
+            if (triad1 == null && triad2 == null) return true;
+            if (triad1 == null || triad2 == null) return false;
+
+            return triad1 == triad2;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
+
+        public int GetHashCode(Triad<T1, T2, T3>? other)
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param3?.GetHashCode() ?? 0);
+                return hash;
+            }
         }
     }
 }

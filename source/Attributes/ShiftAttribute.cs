@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Text;
-
 using System.Security;
 using System.Security.Cryptography;
-
 
 namespace Zustand.Attributes
 {
     using Zustand.Attributes.Interfaces;
-    using Zustand.Subflow;
-    using Zustand.Subflow.Interfaces;
 
     /// <summary>
     /// A class which represents an attribute for shift of a stateflow
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class |
+    [AttributeUsage(AttributeTargets.Property |
+                    AttributeTargets.Class |
+                    AttributeTargets.Field |
                     AttributeTargets.Struct, AllowMultiple = true)]
     public sealed class ShiftAttribute : Attribute, ISubflowAttribute
     {
@@ -24,33 +22,37 @@ namespace Zustand.Attributes
         private byte[]? _data;
 
         /// <summary>
-        /// An array of byte data which represents the inner data which attribute holds
+        /// <inheritdoc cref="_data"/>
         /// </summary>
         public byte[]? Data => _data;
 
-        /// <summary>
-        /// An <see cref="Object"/> type object which represents the object marker for current instance of attribute
-        /// </summary>
-        public object[]? Marker { get; set; }
+        private string _name = string.Empty;
+
+        private uint _weight = default;
+        private bool _stable = default;
 
         /// <summary>
         /// A signed 32-bit integer value representing the logical sign of an attribute
         /// </summary>
         public int Sign { get; } = unchecked((int)0x80000000);
 
-        /// <summary>
-        /// Instance constructor for the class
-        /// </summary>
-        /// <param name="marker">
-        /// A dynamic type object which represents the object marker for current instance of attribute
-        /// </param>
-        public ShiftAttribute(object[]? marker)
+        private ShiftAttribute() { }
+
+        public ShiftAttribute(string name)
         {
-            Marker = marker;
+            _name = name;
 
-            var t = Marker?.ToString();
+            _data = Compute(name);
 
-            _data = Compute(t);
+            Attr = this;
+        }
+
+        public ShiftAttribute(string name,
+                              uint weight,
+                              bool stable) : this(name)
+        {
+            _weight = weight;
+            _stable = stable;
         }
 
         /// <summary>
@@ -62,9 +64,13 @@ namespace Zustand.Attributes
         public ShiftAttribute(ISubflowAttribute attr)
         {
             Attr = attr;
+
             _data = attr.Data;
 
-            Marker = attr.Marker;
+            _name = attr.Name;
+
+            _weight = attr.Weight;
+            _stable = attr.Stable;
         }
 
         /// <summary>
@@ -76,31 +82,35 @@ namespace Zustand.Attributes
         public void Rematch(ShiftAttribute attribute)
         {
             Attr = attribute;
+
             _data = attribute.Data;
 
-            Marker = attribute.Marker;
+            _name = attribute.Name;
+
+            _weight = attribute.Weight;
+            _stable = attribute.Stable;
         }
 
         /// <summary>
         /// Private static method for computing MD5 hash for current instance
         /// </summary>
-        /// <param name="data">
+        /// <param name="input">
         /// A string value which would be parsed into the array of byte data
         /// </param>
         /// <returns>
         /// An array of byte data which represents the inner data which attribute holds
         /// </returns>
-        private static byte[] Compute(string? data)
+        private static byte[] Compute(string input)
         {
-            if (string.IsNullOrEmpty(data))
-                return Array.Empty<byte>();
+            if (string.IsNullOrEmpty(input))
+                throw new ArgumentNullException(nameof(input), "Can't compute hash from empty or null string.");
 
 #pragma warning disable IDE0063
             using (MD5 _MD5 = MD5.Create())
             {
                 _MD5.Initialize();
 
-                byte[] hash =  _MD5.ComputeHash(Encoding.UTF8.GetBytes(data));
+                byte[] hash = _MD5.ComputeHash(Encoding.UTF8.GetBytes(input));
 
                 _MD5.Clear();
 
@@ -109,21 +119,29 @@ namespace Zustand.Attributes
 #pragma warning restore IDE0063
         }
 
+
         /// <summary>
         /// An inner instance of interface for subflow attribute as common instance
         /// </summary>
         public ISubflowAttribute? Attr { get; private set; }
 
+        public string Name => _name;
+
+        public uint Weight => _weight;
+        public bool Stable => _stable;
+
         public static class Extensions
         {
-            private static Type TYPEOF = typeof(ShiftAttribute);
+            private static readonly Type TYPEOF = typeof(ShiftAttribute);
 
             public static ShiftAttribute GetAttribute(Type type)
             {
                 ShiftAttribute? attribute = (ShiftAttribute?) Attribute.GetCustomAttribute(type, TYPEOF);
 
                 if (attribute == null)
+#pragma warning disable S3928
                     throw new ArgumentNullException(nameof(attribute), "Can't parse required attribute from given instance of value.");
+#pragma warning restore S3928 
 
                 return attribute;
             }
@@ -142,13 +160,21 @@ namespace Zustand.Attributes
 
             public static byte[]? GetData<T>(T data) => GetAttribute(data).Data;
 
-            public static object? GetMarker(Type type) => GetAttribute(type).Marker;
-
-            public static object? GetMarker<T>(T data) => GetAttribute(data).Marker;
-
             public static int? GetSign(Type type) => GetAttribute(type).Sign;
 
             public static int? GetSign<T>(T data) => GetAttribute(data).Sign;
+
+            public static string? GetName(Type type) => GetAttribute(type).Name;
+
+            public static string? GetName<T>(T data) => GetAttribute(data).Name;
+
+            public static uint? GetWeight(Type type) => GetAttribute(type).Weight;
+
+            public static uint? GetWeight<T>(T data) => GetAttribute(data).Weight;
+
+            public static bool? GetStable(Type type) => GetAttribute(type).Stable;
+
+            public static bool? GetStable<T>(T data) => GetAttribute(data).Stable;
         }
     }
 }

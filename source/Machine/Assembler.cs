@@ -4,16 +4,17 @@
 
     using Zustand.Subflow;
     using Zustand.Subflow.Interfaces;
-
     using Zustand.Flow;
-
+    using Zustand.Flow.Exceptions;
     using Zustand.Data;
     using Zustand.Data.Types;
+
+    using Zustand.Machines.Interfaces;
 
     /// <summary>
     /// A class representing instance of the methodological state machine for internal and external stateflows
     /// </summary>
-    public class Assembler
+    public class Assembler : IMachine
     {
         /// <summary>
         /// An instance of a class of <see cref="Subflow.State"/> which represents an inner state of current instance of the machine
@@ -37,15 +38,6 @@
         /// An unsigned 64-bit integer value representing custom digital imprint of the sums of current instance of the machine 
         /// </summary>
         private ulong _flag = 0;
-
-        /// <summary>
-        /// An instance of a class of <see cref="Addons.Broker"/> in current instance of the machine which instantiates the rebroker system
-        /// </summary>
-        private readonly Addons.Broker _broker = new();
-        /// <summary>
-        /// An instance of a class of <see cref="Addons.Sender"/> in current instance of the machine which instantiates the reholder system 
-        /// </summary>
-        private readonly Addons.Sender _sender = new();
 
         /// <summary>
         /// A static instance-value of <see cref="Assembler"/> which represents empty assembler without any defined parameters
@@ -78,11 +70,11 @@
         /// <summary>
         /// An instance of a class of <see cref="Addons.Broker"/> in current instance of the machine which instantiates the rebroker system
         /// </summary>
-        public Addons.Broker Broker => _broker;
+        public Addons.Broker Broker { get; } = new();
         /// <summary>
         /// An instance of a class of <see cref="Addons.Sender"/> in current instance of the machine which instantiates the reholder system 
         /// </summary>
-        public Addons.Sender Sender => _sender;
+        public Addons.Sender Sender { get; } = new();
 
         /// <summary>
         /// Instance constructor for the class
@@ -101,7 +93,7 @@
         public Assembler(Assembler assembler)
         {
             if (assembler == EMPTY_INSTANCE)
-                throw new AssemblerNullableException(assembler);
+                throw new ArgumentNullException(nameof(assembler), "Can't create assembler's instance from empty one.");
 
             _state = assembler.State;
             _shift = assembler.Shift;
@@ -111,8 +103,8 @@
             _data = assembler.Data;
             _flag = assembler.Flag;
 
-            _broker = assembler.Broker;
-            _sender = assembler.Sender;
+            Broker = assembler.Broker;
+            Sender = assembler.Sender;
         }
 
         /// <summary>
@@ -178,8 +170,8 @@
                 _data = assembler.Data;
                 _flag = assembler.Flag;
 
-                _broker = assembler.Broker;
-                _sender = assembler.Sender;
+                Broker = assembler.Broker;
+                Sender = assembler.Sender;
             }
         }
 
@@ -220,8 +212,8 @@
                 _data = assembler.Data;
                 _flag = assembler.Flag;
 
-                _broker = assembler.Broker;
-                _sender = assembler.Sender;
+                Broker = assembler.Broker;
+                Sender = assembler.Sender;
             }
         }
 
@@ -252,8 +244,8 @@
                 _data = assembler.Data;
                 _flag = assembler.Flag;
 
-                _broker = assembler.Broker;
-                _sender = assembler.Sender;
+                Broker = assembler.Broker;
+                Sender = assembler.Sender;
             }
         }
 
@@ -299,8 +291,8 @@
                 _data = assembler.Data;
                 _flag = assembler.Flag;
 
-                _broker = assembler.Broker;
-                _sender = assembler.Sender;
+                Broker = assembler.Broker;
+                Sender = assembler.Sender;
             }
         }
 
@@ -325,11 +317,11 @@
     /// <typeparam name="T">
     /// A generic-type value which represents the core rotation value of the assembler's instance
     /// </typeparam>
-    public class Assembler<T> : Assembler where T : notnull
+    public class Assembler<T> : Assembler, IMachine<T> where T : notnull
     {
         /// <summary>
         /// An instance value of <see cref="Pair{T}"/> within two generic values which represents inner cycle of finite automaton
         /// </summary>
-        public Pair<T>? Heartbeat { get; set; } = new();
+        public Pair<T>? Heartbeat { get; set; } = default;
     }
 }

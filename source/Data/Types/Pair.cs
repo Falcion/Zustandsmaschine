@@ -16,7 +16,10 @@
     /// <typeparam name="T">
     /// A generic type which defines type of both values which container will storage
     /// </typeparam>
-    public class Pair<T> : IData
+#pragma warning disable S4035
+    public class Pair<T> : IData, IEquatable<Pair<T>>,
+#pragma warning restore S4035
+                           IEqualityComparer<Pair<T>>
     {
         /// <summary>
         /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
@@ -41,7 +44,7 @@
         /// <param name="param2">
         /// A generic type <typeparamref name="T"/> value representing one of parameters in the data type
         /// </param>
-        public Pair(T? param1, 
+        public Pair(T? param1,
                     T? param2)
         {
             Param1 = param1;
@@ -112,6 +115,89 @@
             Param1 = default;
             Param2 = default;
         }
+
+        public static implicit operator Pair<T>(
+                                       Tuple<T, T> value)
+        {
+            return new Pair<T>(value);
+        }
+
+        public static implicit operator Pair<T>(
+                                            (T, T) value)
+        {
+            return new Pair<T>(value);
+        }
+
+        public static bool operator ==(Pair<T>? pair1,
+                                       Pair<T>? pair2)
+        {
+            if (ReferenceEquals(pair1,
+                                pair2))
+                return true;
+
+            if (pair1 is null && pair2 is null)
+                return true;
+            if (pair1 is null || pair2 is null)
+                return false;
+
+            return EqualityComparer<T>.Default.Equals(pair1.Param1, pair2.Param1) &&
+                   EqualityComparer<T>.Default.Equals(pair1.Param2, pair2.Param2);
+        }
+
+        public static bool operator !=(Pair<T>? pair1,
+                                       Pair<T>? pair2)
+        {
+            return !(pair1 == pair2);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Pair<T> another)
+            {
+                return this == another;
+            }
+
+            return false;
+        }
+
+        public bool Equals(Pair<T>? other)
+        {
+            if (other is null)
+                return false;
+
+            return this == other;
+        }
+
+        public bool Equals(Pair<T>? pair1,
+                           Pair<T>? pair2)
+        {
+            if (pair1 == null && pair2 == null) return true;
+            if (pair1 == null || pair2 == null) return false;
+
+            return pair1 == pair2;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
+
+        public int GetHashCode(Pair<T>? other)
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (other?.Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (other?.Param2?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
     }
 
     /// <summary>
@@ -123,7 +209,10 @@
     /// <typeparam name="T2">
     /// A generic type which defines type of one of the values which container will storage
     /// </typeparam>
-    public class Pair<T1, T2> : IData
+#pragma warning disable S4035
+    public class Pair<T1, T2> : IData, IEquatable<Pair<T1, T2>>,
+#pragma warning restore S4035
+                                IEqualityComparer<Pair<T1, T2>>
     {
         /// <summary>
         /// A generic type <typeparamref name="T1"/> value representing one of parameters in the data type
@@ -222,6 +311,89 @@
         {
             Param1 = default;
             Param2 = default;
+        }
+
+        public static implicit operator Pair<T1, T2>(
+                                       Tuple<T1, T2> value)
+        {
+            return new Pair<T1, T2>(value);
+        }
+
+        public static implicit operator Pair<T1, T2>(
+                                            (T1, T2) value)
+        {
+            return new Pair<T1, T2>(value);
+        }
+
+        public static bool operator ==(Pair<T1, T2>? pair1,
+                                       Pair<T1, T2>? pair2)
+        {
+            if (ReferenceEquals(pair1,
+                                pair2))
+                return true;
+
+            if (pair1 is null && pair2 is null)
+                return true;
+            if (pair1 is null || pair2 is null)
+                return false;
+
+            return EqualityComparer<T1>.Default.Equals(pair1.Param1, pair2.Param1) &&
+                   EqualityComparer<T2>.Default.Equals(pair1.Param2, pair2.Param2);
+        }
+
+        public static bool operator !=(Pair<T1, T2>? pair1,
+                                       Pair<T1, T2>? pair2)
+        {
+            return !(pair1 == pair2);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Pair<T1, T2> another)
+            {
+                return this == another;
+            }
+
+            return false;
+        }
+
+        public bool Equals(Pair<T1, T2>? other)
+        {
+            if(other is null)
+                return false;
+
+            return this == other;
+        }
+
+        public bool Equals(Pair<T1, T2>? pair1,
+                           Pair<T1, T2>? pair2)
+        {
+            if (pair1 == null && pair2 == null) return true;
+            if (pair1 == null || pair2 == null) return false;
+
+            return pair1 == pair2;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (Param2?.GetHashCode() ?? 0);
+                return hash;
+            }
+        }
+
+        public int GetHashCode(Pair<T1, T2>? other)
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + (other?.Param1?.GetHashCode() ?? 0);
+                hash = hash * 23 + (other?.Param2?.GetHashCode() ?? 0);
+                return hash;
+            }
         }
     }
 }

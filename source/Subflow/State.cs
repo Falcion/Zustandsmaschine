@@ -1,11 +1,13 @@
-﻿namespace Zustand.Subflow
+﻿using Zustand.Attributes;
+
+namespace Zustand.Subflow
 {
     using Zustand.Subflow.Interfaces;
 
     /// <summary>
     /// A class which represents the state of the stateflow
     /// </summary>
-    public class State : ISubflow
+    public sealed class State : ISubflow, IComparable<State>, IEquatable<State>, IEqualityComparer<State>
     {
         /// <summary>
         /// A string value which represents the designation value of the current state
@@ -24,7 +26,7 @@
         /// A signed 64-bit integer value which represents the private key for current state
         /// </summary>
 #pragma warning disable IDE1006
-        private long key { get; set; } = default;
+        private long _key { get; set; } = default;
 #pragma warning restore IDE1006
 
         /// <summary>
@@ -38,7 +40,7 @@
         /// <param name="key"></param>
         private State(long key)
         {
-            this.key = key < 0 ? key * (-1) : key;
+            this._key = key < 0 ? key * (-1) : key;
         }
 
         /// <summary>
@@ -194,38 +196,47 @@
         /// <summary>
         /// A static instance of the <see cref="State"/> which represents correspondive default combination
         /// </summary>
+        [State("Unknown", 0, true)]
         public static State UNKNOWN { get; } = new("Unknown", 0, true);
         /// <summary>
         /// A static instance of the <see cref="State"/> which represents correspondive default combination
         /// </summary>
+        [State("Skipped", 1, true)]
         public static State SKIPPED { get; } = new("Skipped", 1, true);
         /// <summary>
         /// A static instance of the <see cref="State"/> which represents correspondive default combination
         /// </summary>
+        [State("Pending", 2, true)]
         public static State PENDING { get; } = new("Pending", 2, true);
         /// <summary>
         /// A static instance of the <see cref="State"/> which represents correspondive default combination
         /// </summary>
+        [State("Failed", 3, false)]
         public static State FAILED { get; } = new("Failed", 3, false);
         /// <summary>
         /// A static instance of the <see cref="State"/> which represents correspondive default combination
         /// </summary>
+        [State("Staged", 4, false)]
         public static State STAGED { get; } = new("Staged", 4, false);
         /// <summary>
         /// A static instance of the <see cref="State"/> which represents correspondive default combination
         /// </summary>
+        [State("Iterating", 5, false)]
         public static State ITERATING { get; } = new("Iterating", 5, false);
         /// <summary>
         /// A static instance of the <see cref="State"/> which represents correspondive default combination
         /// </summary>
+        [State("Processing", 6, true)]
         public static State PROCESSING { get; } = new("Processing", 6, true);
         /// <summary>
         /// A static instance of the <see cref="State"/> which represents correspondive default combination
         /// </summary>
+        [State("Successful", 7, true)]
         public static State SUCCESSFUL { get; } = new("Successful", 7, true);
         /// <summary>
         /// A static instance of the <see cref="State"/> which represents correspondive default combination
         /// </summary>
+        [State("Interrupted", 8, false)]
         public static State INTERRUPTED { get; } = new("Interrupted", 8, false);
 
         /// <summary>
@@ -335,7 +346,7 @@
             this._weight = default;
             this._stable = default;
 
-            this.key = default;
+            this._key = default;
         }
 
         /// <summary>
@@ -345,7 +356,7 @@
         /// A signed 64-bit integer value which represents the private key for current state
         /// </param>
         public void Reidentify(long key)
-                      => this.key = key;
+                     => this._key = key;
 
         /// <summary>
         /// Method which changes the identity of current instance through combination of key and coefficient
@@ -357,25 +368,25 @@
         /// A signed 32-bit integer value which represents coefficient with which combination of weights would be found
         /// </param>
         public void Reidentify(long key, int coef)
-                     => this.key = (key^(int)coef);
+                     => this._key = key* coef;
 
         /// <summary>
-        /// A string value which represents the designation value of the current state
+        /// <inheritdoc cref="_designation"/>
         /// </summary>
         public string Designation => _designation;
         /// <summary>
-        /// An unsigned 32-bit integer value which represents the weight of the current state
+        /// <inheritdoc cref="_weight"/>
         /// </summary>
         public uint Weight => _weight;
         /// <summary>
-        /// Boolean parameter which defines the common stable representation of the current state
+        /// <inheritdoc cref="_stable"/>
         /// </summary>
         public bool Stable => _stable;
 
         /// <summary>
-        /// A signed 64-bit integer value which represents the private key for current state
+        /// <inheritdoc cref="_key"/>
         /// </summary>
-        public long Key => this.key;
+        public long Key => this._key;
 
         /// <summary>
         /// An overriden default method which converts object to string
@@ -513,5 +524,166 @@
         /// A static instance of the <see cref="State"/> which represents an empty subflow
         /// </summary>
         public static State EMPTY_STATE { get; } = new();
+
+        public static implicit operator State(Tuple<string, uint, 
+                                                            bool>? tuple)
+        {
+            return new State(tuple?.Item1 ?? string.Empty,
+                             tuple?.Item2 ?? default,
+                             tuple?.Item3 ?? default);
+        }
+
+        public static bool operator ==(State? state1,
+                                       State? state2)
+        {
+            if (ReferenceEquals(state1,
+                               state2))
+                return true;
+
+            if (state1 is null && state2 is null)
+                return true;
+            if (state1 is null || state2 is null)
+                return false;
+
+            string design1 = state1.Designation.ToLower(),
+                   design2 = state2.Designation.ToLower();
+
+            if (design1 != design2)
+                return false;
+            if (state1.Stable != state2.Stable)
+                return false;
+            if (state1.Weight != state2.Weight)
+                return false;
+
+            return true;
+        }
+
+        public static bool operator !=(State? state1,
+                                       State? state2)
+        {
+            return !(state1 == state2);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if(obj is State another)
+            {
+                return this == another;
+            }
+
+            return false;
+        }
+
+        public bool Equals(State? other)
+        {
+            if(other is null)
+                return false;
+
+            return this == other;
+        }
+
+        public bool Equals(State? state1,
+                           State? state2)
+        {
+            if (state1 == null && state2 == null) return true;
+            if (state1 == null || state2 == null) return false;
+
+            return state1 == state2;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.Designation,
+                                    this.Weight,
+                                    this.Stable,
+                                    this.Key);
+        }
+
+        public int GetHashCode(State state)
+        {
+            return HashCode.Combine(state.Designation,
+                                    state.Weight,
+                                    state.Stable,
+                                    state.Key);
+        }
+
+        public int CompareTo(State? other)
+        {
+            if (other is null)
+                return 1;
+
+            int comparison_weight = _weight.CompareTo(other.Weight),
+                comparison_stable = _stable.CompareTo(other.Stable);
+
+            if (comparison_weight != 0) return comparison_weight;
+            if (comparison_stable != 0) return comparison_stable;
+
+            int comparison_designation = string.Compare(_designation,
+                                                   other.Designation, StringComparison.InvariantCultureIgnoreCase);
+
+            if (comparison_designation != 0) return comparison_designation;
+
+            return Key.CompareTo(other.Key);
+        }
+
+        public static bool operator >(State left, State right)
+        {
+            if (ReferenceEquals(left, right))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(left, null))
+            {
+                return false;
+            }
+
+            return left.CompareTo(right) > 0;
+        }
+
+        public static bool operator >=(State left, State right)
+        {
+            if (ReferenceEquals(left, right))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(left, null))
+            {
+                return false;
+            }
+
+            return left.CompareTo(right) >= 0;
+        }
+
+        public static bool operator <(State left, State right)
+        {
+            if (ReferenceEquals(left, right))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(left, null))
+            {
+                return false;
+            }
+
+            return left.CompareTo(right) < 0;
+        }
+
+        public static bool operator <=(State left, State right)
+        {
+            if (ReferenceEquals(left, right))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(left, null))
+            {
+                return false;
+            }
+
+            return left.CompareTo(right) <= 0;
+        }
     }
 }
