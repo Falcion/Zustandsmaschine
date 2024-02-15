@@ -25,11 +25,6 @@
 
         private readonly Jenga<Triad<Pair<Int64>, string, Phases>> _interactions = new();
 
-        private Broker(ulong id) : this()
-        {
-            _id = id;
-        }
-
         /// <summary>
         /// Instance constructor for the class
         /// </summary>
