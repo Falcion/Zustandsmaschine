@@ -7,11 +7,11 @@
     {
         private int[,] _matrix = new int[5, 5];
 
-        private Pair<int> _corners = new Pair<int>(default(int),
-                                                   default(int));
+        private Pair<int> _corners = new Pair<int>(default,
+                                                   default);
 
-        private Pair<int> _centers = new Pair<int>(default(int),
-                                                   default(int));
+        private Pair<int> _centers = new Pair<int>(default,
+                                                   default);
 
         public Transdefs() { }
 
