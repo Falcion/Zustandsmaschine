@@ -17,4 +17,8 @@ COPY . .
 EXPOSE 3000
 
 # Command to start your application
-CMD ["npm", "prepare:main"]
+RUN npm run prepare:main
+
+RUN cd './source'
+
+CMD ["dotnet", "build", "Zustand.csproj"]

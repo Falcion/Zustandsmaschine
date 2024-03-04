@@ -4,16 +4,16 @@ repository:
   # See https://docs.github.com/en/rest/reference/repos#update-a-repository for all available settings.
 
   # The name of the repository. Changing this will rename the repository
-  name: Patternugit
+  name: Zustandsmaschine
 
   # A short description of the repository that will show up on GitHub
-  description: 'Preconfigured pattern for your repository with universal cases for markdown files of documentations and other actions/scripts'
+  description: '.NET library, implementing an advanced custom state-machines mechanic for your code with custom messages system block'
 
   # A URL with more information about the repository
   homepage: ''
 
   # A comma-separated list of topics to set on the repository
-  topics: github, documentation, repository, repository-template, github-template, workflows-to-access, workflows-reusable
+  topics: kafka, state-management, csharp, state-machine, dotnet, staging, dotnet-core, stateflow, csharp-lib
 
   # Either `true` to make the repository private, or `false` to make it public.
   private: false
@@ -23,10 +23,10 @@ repository:
 
   # Either `true` to enable projects for this repository, or `false` to disable them.
   # If projects are disabled for the organization, passing `true` will cause an API error.
-  has_projects: false
+  has_projects: true
 
   # Either `true` to enable the wiki for this repository, `false` to disable it.
-  has_wiki: false
+  has_wiki: true
 
   # Either `true` to enable downloads for this repository, `false` to disable them.
   has_downloads: true
@@ -236,9 +236,9 @@ labels:
 
 # Milestones: define milestones for Issues and Pull Requests
 milestones:
-  - title: Public release of project
-    description: "A preparations and milestone, including everything to prepare for one final release to publish project as ready-to-use without any bugs, leaks, security problems and etc., doesn't mean that project won't be updated and etc."
-    state: closed
+  #- title: Public release of project
+  #  description: "A preparations and milestone, including everything to prepare for one final release to publish project as ready-to-use without any bugs, leaks, security problems and etc., doesn't mean that project won't be updated and etc."
+  #  state: closed
   #- title: milestone-title
     #description: milestone-description
     # The state of the milestone. Either `open` or `closed`

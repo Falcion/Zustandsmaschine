@@ -1,4 +1,4 @@
-At PATTERNU, project takes the security of its code, data, and the broader community seriously, this security policy (thereafter as “policy”) outlines the measures and expectations we have in place to safeguard our repository and its users from potential security threats.
+At ZUSTAND, project takes the security of its code, data, and the broader community seriously, this security policy (thereafter as “policy”) outlines the measures and expectations we have in place to safeguard our repository and its users from potential security threats.
 
 Project's commitment to security encompasses not only the codebase itself but also the interactions, discussions, and contributions that occur within this repository, it is believe that a collective effort towards security enhances the overall experience for everyone involved.
 

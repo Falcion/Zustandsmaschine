@@ -14,3 +14,10 @@ updates:
     # Add assignees
     assignees:
       - "octocat"
+  - package-ecosystem: "nuget"
+    directory: "/source"
+    schedule:
+      interval: "weekly"
+    # Add assignees
+    assignees:
+      - "octocat"

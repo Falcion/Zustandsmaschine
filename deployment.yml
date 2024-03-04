@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app-deployment
+  name: zustand
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: my-app
+      app: zustand
   template:
     metadata:
       labels:
-        app: my-app
+        app: zustand
     spec:
       containers:
-        - name: my-app-container
-          image: your-docker-image:latest
+        - name: zustand
+          image: zustand:latest
           ports:
             - containerPort: 3000

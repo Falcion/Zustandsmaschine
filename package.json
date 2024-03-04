@@ -1,14 +1,14 @@
 {
-  "name": "patternugit",
+  "name": "zustand",
   "private": "true",
-  "version": "0.3.1",
-  "description": "Preconfigured pattern for your repository with universal cases for markdown files of documentations and other actions/scripts",
+  "version": "0.0.0",
+  "description": ".NET library, implementing an advanced custom state-machines mechanic for your code with custom messages system block",
   "main": "prepare.ts",
   "type": "commonjs",
   "directories": {
     "doc": "docs"
   },
-  "readme": "https://github.com/Falcion/Patternugit#readme",
+  "readme": "https://github.com/Falcion/Zustandsmaschine#readme",
   "scripts": {
     "preinit": "npm i --force",
     "generate-version-json": "node scripts/js/generate-version-json.js",
@@ -22,10 +22,10 @@
     "lint:js-in-markdown": "electron-lint-markdown-standard --root docs \"**/*.md\"",
     "precommit": "lint-staged",
     "prepack": "check-for-leaks",
-    "prepare": "husky .husky/ && cd scripts/python && py -m venv venv && node run prepare:main",
+    "prepare": "husky .husky/ && cd scripts/python && py -m venv venv && cd ./../../ && npm run prepare:main",
     "prepare:husky": "husky .husky/",
     "prepare:python": "cd scripts/python && py -m venv venv",
-    "prepare:main": "node prepare.ts",
+    "prepare:main": "ts-node prepare.ts",
     "build": "tsc -noEmit -skipLibCheck prepare.ts && node esbuild.config.mjs production",
     "pack": "python scripts/python/pack.py",
     "release": "standard-version",
@@ -35,23 +35,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Falcion/Patternugit.git"
+    "url": "git+https://github.com/Falcion/Zustandsmaschine.git"
   },
   "keywords": [
-    "github",
-    "documentation",
-    "repository",
-    "repository-template",
-    "github-template",
-    "workflows-to-access",
-    "workflows-reusable"
+    "kafka",
+    "state-management",
+    "csharp",
+    "state-machine",
+    "dotnet",
+    "staging",
+    "dotnet-core",
+    "stateflow",
+    "csharp-lib"
   ],
   "author": "Falcion",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Falcion/Patternugit/issues"
+    "url": "https://github.com/Falcion/Zustandsmaschine/issues"
   },
-  "homepage": "https://github.com/Falcion/Patternugit#readme",
+  "homepage": "https://github.com/Falcion/Zustandsmaschine#readme",
   "prettier": {
     "tabWidth": 4,
     "useTabs": true,
@@ -146,28 +148,28 @@
   "badges": [
     {
       "description": "contributors",
-      "href": "https://github.com/Falcion/Patternugit/graphs/contributors",
-      "url": "https://img.shields.io/github/contributors/Falcion/Patternugit"
+      "href": "https://github.com/Falcion/Zustandsmaschine/graphs/contributors",
+      "url": "https://img.shields.io/github/contributors/Falcion/Zustandsmaschine"
     },
     {
       "description": "stargazers",
-      "href": "https://github.com/Falcion/Patternugit/stargazers",
-      "url": "https://img.shields.io/github/stars/Falcion/Patternugit"
+      "href": "https://github.com/Falcion/Zustandsmaschine/stargazers",
+      "url": "https://img.shields.io/github/stars/Falcion/Zustandsmaschine"
     },
     {
       "description": "forks",
-      "href": "https://github.com/Falcion/Patternugit/forks",
-      "url": "https://img.shields.io/github/forks/Falcion/Patternugit"
+      "href": "https://github.com/Falcion/Zustandsmaschine/forks",
+      "url": "https://img.shields.io/github/forks/Falcion/Zustandsmaschine"
     },
     {
       "description": "issues",
-      "href": "https://github.com/Falcion/Patternugit/issues",
-      "url": "https://img.shields.io/github/issues/Falcion/Patternugit"
+      "href": "https://github.com/Falcion/Zustandsmaschine/issues",
+      "url": "https://img.shields.io/github/issues/Falcion/Zustandsmaschine"
     },
     {
       "description": "last-commit",
-      "href": "https://github.com/Falcion/Patternugit/commits",
-      "url": "https://img.shields.io/github/last-commit/Falcion/Patternugit"
+      "href": "https://github.com/Falcion/Zustandsmaschine/commits",
+      "url": "https://img.shields.io/github/last-commit/Falcion/Zustandsmaschine"
     }
   ]
 }
