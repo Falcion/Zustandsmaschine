@@ -5,13 +5,16 @@
     using Zustand.Data.Arrays;
     using Zustand.Data.Types;
     using Zustand.Data.Types.Interfaces;
+    using Zustand.Machine.Addons.Interfaces;
     using Zustand.Machine.Addons.Traits;
 
     /// <summary>
     /// A class which represents an instance of messaging broker for assemblies of state machine
     /// </summary>
-    public class Broker
+    public class Broker : IBroker
     {
+        public Type Instance => typeof(this);
+
         public Approaches Last { get; set; } = Approaches.UNDEFINED;
         public Approaches Next { get; set; } = Approaches.UNDEFINED;
         public Approaches Current { get; set; } = Approaches.DEFAULT;
@@ -54,16 +57,67 @@
         /// <summary>
         /// An inner class which represents localized for current instance version of analytics machine via instance of <see cref="Sender"/>
         /// </summary>
-        private static sealed class Interim 
+        private static class Interim 
         {
             public static void Differ(Broker instance)
             {
-                /* */
+                if(instance.Phase == Phases.UP || instance.Phase == Phases.UPPER)
+                {
+                    var approach = instance.Phase == Phases.UPPER ? Approaches.GLOBAL : Approaches.DIRECT;
+
+                    instance.Next = approach;
+                    instance.Current = Approaches.UNDEFINED;
+
+                    instance.Signature(Phases.NONE);
+
+                    instance._scope += instance._scope;
+                    instance._codes += instance._codes;
+
+                    instance.Add("Caught appending phase, downgrading status.", +1, +1);
+                }
+                else if(instance.Phase == Phases.LOW || instance.Phase == Phases.LOWER)
+                {
+                    var approach = instance.Phase == Phases.UPPER ? Approaches.GLOBAL : Approaches.DIRECT;
+
+                    instance.Next = approach;
+                    instance.Current = Approaches.UNDEFINED;
+
+                    instance.Signature(Phases.NONE);
+
+#pragma warning disable S1764
+                    instance._scope -= instance._scope;
+                    instance._codes -= instance._codes;
+#pragma warning restore S1764
+
+                    instance.Add("Caught downgrading phase, annihilating status.", -1, -1);
+                }
+                else
+                {
+                    instance.Signature(Phases.NONE);
+
+                    instance.Add("Caught static phase, keeping it.", 0, 0);
+
+                    instance.Signature();
+                }
             }
 
             public static void Indiffer(Broker instance)
             {
-                /* */
+                if(instance.Codes == -1)
+                {
+                    instance.Add("Broker has caught instability value!");
+
+                    instance.Blur();
+                }
+
+                if(instance.Scope == -1)
+                {
+                    instance.Add("Broker has caught total instability and exception situtation! Misbehave concluded in case.");
+
+                    instance.Signature(Phases.STATIC);
+
+                    instance.Blur();
+                }
             }
 
             public static Phases Phasing(long p_codes, 
@@ -148,7 +202,7 @@
             Signature(Phases.BLUR);
         }
 
-        private void Push(long scope, 
+        internal void Push(long scope, 
                           long codes, string message, Phases phase)
         {
             _interactions.Push(new Triad<Pair<Int64>, string, Phases>(new Pair<long>(scope,
@@ -165,8 +219,8 @@
             long p_scope = p_codes ^ timestamp ^ this._codes;
 
             var p_phase = Interim.Phasing(p_codes, 
-                                         p_scope, this._codes, 
-                                                  this._scope);
+                                          p_scope, this._codes, 
+                                                   this._scope);
 
             Phase = p_phase;
             
@@ -194,8 +248,8 @@
             long p_scope = codes ^ timestamp ^ this._codes;
 
             var p_phase = Interim.Phasing(codes,
-                                         p_scope, this._codes,
-                                                  this._scope);
+                                          p_scope, this._codes,
+                                                   this._scope);
             Phase = p_phase;
 
             this._scope = codes ^ timestamp ^ this._codes;
@@ -210,6 +264,8 @@
             Last = Current;
 
             Current = Next = Approaches.DIRECT;
+
+            Interim.Indiffer(this);
         }
 
         public void Add(string message, Int64 codes,
@@ -229,6 +285,8 @@
             Last = Current;
 
             Current = Next = Approaches.GLOBAL;
+
+            Interim.Indiffer(this);
         }
 
         public void Add(string message, Int64 codes,

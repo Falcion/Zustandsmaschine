@@ -10,6 +10,7 @@
     using Zustand.Data.Types;
 
     using Zustand.Machines.Interfaces;
+    using Zustand.Machines.Interfaces.Assignees;
 
     /// <summary>
     /// A class representing instance of the methodological state machine for internal and external stateflows
@@ -61,20 +62,20 @@
         /// <summary>
         /// An unsigned 64-bit integer value representing current differentiates of the sums of current instance of the machine 
         /// </summary>
-        public ulong Data => _data;
+        public ulong Data { get => _data; internal set { _data = value; } }
         /// <summary>
         /// An unsigned 64-bit integer value representing custom digital imprint of the sums of current instance of the machine 
         /// </summary>
-        public ulong Flag => _flag;
+        public ulong Flag { get => _flag; internal set { _flag = value; } }
 
         /// <summary>
         /// An instance of a class of <see cref="Addons.Broker"/> in current instance of the machine which instantiates the rebroker system
         /// </summary>
-        public Addons.Broker Broker { get; } = new();
+        public Addons.Broker Broker { get; internal set; } = new();
         /// <summary>
         /// An instance of a class of <see cref="Addons.Sender"/> in current instance of the machine which instantiates the reholder system 
         /// </summary>
-        public Addons.Sender Sender { get; } = new();
+        public Addons.Sender Sender { get; internal set; } = new();
 
         /// <summary>
         /// Instance constructor for the class
@@ -308,6 +309,36 @@
             _shift = inner.Shift;
 
             _inner = inner;
+        }
+
+        public void Mark(ulong value, Sums sum)
+        {
+            switch(sum)
+            {
+                case Sums.DATA:
+                    _data = value;
+                    break;
+                case Sums.FLAG:
+                    _flag = value;
+                    break;
+                case Sums.ALL:
+                    _data = value;
+                    _flag = value;
+                    break;
+                default:
+                    throw new ArgumentException("Unknown value representing enum range.", nameof(sum));
+            }
+        }
+
+        public void Nullify()
+        {
+            _state = null;
+            _shift = null;
+
+            _inner = null;
+
+            _data = 0;
+            _flag = 0;
         }
     }
 
